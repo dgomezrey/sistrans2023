@@ -1,5 +1,7 @@
 package uniandes.edu.co.hotel_andes.modelo;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,34 +11,34 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="habitaciones")
-public class Habitacion {
+@Table(name = "reservasservicios")
+public class ReservaServicio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Integer numero;
+    private Date fechaInicio;
 
-    private Integer piso;
+    private Date fechaFin;
 
     @ManyToOne
     @JoinColumn(name = "reservaAlojamiento", referencedColumnName = "id")
     private ReservaAlojamiento reservaAlojamiento;
 
     @ManyToOne
-    @JoinColumn(name = "tipoHabitacion", referencedColumnName = "id")
-    private TipoHabitacion tipoHabitacion;
+    @JoinColumn(name = "servicio", referencedColumnName = "id")
+    private Servicio servicio;
 
-
-    public Habitacion(Integer numero, Integer piso, ReservaAlojamiento reservaAlojamiento, TipoHabitacion tipoHabitacion) {
-        this.numero = numero;
-        this.piso = piso;
+    public ReservaServicio(Date fechaInicio, Date fechaFin, ReservaAlojamiento reservaAlojamiento,
+            Servicio servicio) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.reservaAlojamiento = reservaAlojamiento;
-        this.tipoHabitacion = tipoHabitacion;
+        this.servicio = servicio;
     }
 
-    public Habitacion() {;}
+    public ReservaServicio() {;}
 
     public Integer getId() {
         return id;
@@ -46,20 +48,20 @@ public class Habitacion {
         this.id = id;
     }
 
-    public Integer getNumero() {
-        return numero;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public Integer getPiso() {
-        return piso;
+    public Date getFechaFin() {
+        return fechaFin;
     }
 
-    public void setPiso(Integer piso) {
-        this.piso = piso;
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public ReservaAlojamiento getReservaAlojamiento() {
@@ -70,12 +72,12 @@ public class Habitacion {
         this.reservaAlojamiento = reservaAlojamiento;
     }
 
-    public TipoHabitacion getTipoHabitacion() {
-        return tipoHabitacion;
+    public Servicio getServicio() {
+        return servicio;
     }
 
-    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
-        this.tipoHabitacion = tipoHabitacion;
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
     }
-  
+    
 }
