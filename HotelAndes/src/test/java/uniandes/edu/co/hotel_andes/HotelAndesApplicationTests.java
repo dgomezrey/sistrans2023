@@ -1,10 +1,10 @@
-package uniandes.edu.co.parranderos;
+package uniandes.edu.co.hotel_andes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ParranderosApplicationTests {
+class HotelAndesApplicationTests {
 
 	@Test
 	void contextLoads() {
