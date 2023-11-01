@@ -26,7 +26,7 @@ public interface TipoUsuarioRepositorio extends JpaRepository<TipoUsuario, Integ
     @Modifying
     @Transactional
     @Query(value = "UPDATE tiposusuario SET tipo = :tipo WHERE id = :id", nativeQuery = true)
-    void atualizarTipoUsuario(@Param("id") long id, @Param("tipo") String tipo);
+    void actualizarTipoUsuario(@Param("id") long id, @Param("tipo") String tipo);
 
     @Modifying
     @Transactional
