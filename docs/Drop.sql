@@ -1,3 +1,5 @@
+DROP SEQUENCE hotelandes_sequence;
+
 DROP TABLE consumos CASCADE CONSTRAINTS;
 
 DROP TABLE habitaciones CASCADE CONSTRAINTS;

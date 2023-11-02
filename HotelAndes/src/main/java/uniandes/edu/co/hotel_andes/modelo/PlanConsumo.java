@@ -1,12 +1,17 @@
 package uniandes.edu.co.hotel_andes.modelo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "planesconsumo")
+@Table(name = "PlanesConsumo")
 public class PlanConsumo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String nombre;
@@ -15,13 +20,13 @@ public class PlanConsumo {
 
     private Float descuento;
 
+    public PlanConsumo() {;}
+
     public PlanConsumo(String nombre, String descripcion, Float descuento) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.descuento = descuento;
     }
-
-    public PlanConsumo() {;}
 
     public Integer getId() {
         return id;

@@ -9,31 +9,41 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "Usuarios")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    private String usuario;
+
+    private String contrasena;
+
     private String nombre;
 
-    private String apellido;
+    private String email;
+
+    private String tipoDocumento;
 
     private String documento;
 
     @ManyToOne
-    @JoinColumn(name = "tipoUsuario", referencedColumnName = "id")
-    private TipoUsuario tipoUsuario;
-
-    public Usuario(String nombre, String apellido, String documento, TipoUsuario tipoUsuario) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.documento = documento;
-        this.tipoUsuario = tipoUsuario;
-    }
+    @JoinColumn(name = "TiposUsuario_id", referencedColumnName = "id")
+    private TipoUsuario TiposUsuario_id;
 
     public Usuario() {;}
+
+    public Usuario(String usuario, String contrasena, String nombre, String email, String tipoDocumento,
+            String documento, TipoUsuario tiposUsuario_id) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.email = email;
+        this.tipoDocumento = tipoDocumento;
+        this.documento = documento;
+        TiposUsuario_id = tiposUsuario_id;
+    }
 
     public Integer getId() {
         return id;
@@ -41,6 +51,22 @@ public class Usuario {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getNombre() {
@@ -51,12 +77,20 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getEmail() {
+        return email;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
     public String getDocumento() {
@@ -67,12 +101,12 @@ public class Usuario {
         this.documento = documento;
     }
 
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
+    public TipoUsuario getTiposUsuario_id() {
+        return TiposUsuario_id;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setTiposUsuario_id(TipoUsuario tiposUsuario_id) {
+        TiposUsuario_id = tiposUsuario_id;
     }
-    
+
 }

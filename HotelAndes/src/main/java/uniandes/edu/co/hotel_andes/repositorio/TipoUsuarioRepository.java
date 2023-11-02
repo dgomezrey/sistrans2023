@@ -10,27 +10,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 import uniandes.edu.co.hotel_andes.modelo.TipoUsuario;
 
-public interface TipoUsuarioRepositorio extends JpaRepository<TipoUsuario, Integer> {
+public interface TipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer> {
 
-    @Query(value = "SELECT * FROM tiposusuario", nativeQuery = true)
+    @Query(value = "SELECT * FROM TiposUsuario", nativeQuery = true)
     Collection<TipoUsuario> darTiposUsuarios();
 
-    @Query(value = "SELECT * FROM tiposusuario WHERE id = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM TiposUsuario WHERE id = :id", nativeQuery = true)
     TipoUsuario darTipoUsuario(@Param("id") long id);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM tiposusuario WHERE id = :id", nativeQuery = true)
-    void eliminarTipoUsuario(@Param("id") long id);
+    @Query(value = "INSERT INTO TiposUsuario (id, tipo) VALUES ( hotelandes_sequence.nextval , :tipo)", nativeQuery = true)
+    void insertarTipoUsuario(@Param("tipo") String tipo);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE tiposusuario SET tipo = :tipo WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE TiposUsuario SET tipo = :tipo WHERE id = :id", nativeQuery = true)
     void actualizarTipoUsuario(@Param("id") long id, @Param("tipo") String tipo);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO tiposusuario (id, tipo) VALUES ( hotelandesSequence , :tipo)", nativeQuery = true)
-    void insertarTipoUsuario(@Param("tipo") String tipo);
-    
+    @Query(value = "DELETE FROM TiposUsuario WHERE id = :id", nativeQuery = true)
+    void eliminarTipoUsuario(@Param("id") long id);
 }

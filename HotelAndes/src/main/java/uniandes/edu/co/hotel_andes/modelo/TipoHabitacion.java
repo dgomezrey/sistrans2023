@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tiposhabitacion")
+@Table(name = "TiposHabitacion")
 public class TipoHabitacion {
 
     @Id
@@ -70,7 +70,5 @@ public class TipoHabitacion {
     public void setCostoPorNoche(Float costopornoche) {
         this.costopornoche = costopornoche;
     }
-
-    
     
 }

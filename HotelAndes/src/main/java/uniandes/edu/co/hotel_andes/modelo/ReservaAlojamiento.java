@@ -11,38 +11,30 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "reservasalojamiento")
+@Table(name = "ReservasAlojamiento")
 public class ReservaAlojamiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Date fecha;
+    private Date fechaIn;
 
-    private Integer numNoches;
+    private Date fechaOut;
 
-    private Integer numAdultos;
-
-    private Integer numMenores;
+    private Integer numPersonas;
 
     @ManyToOne
-    @JoinColumn(name = "usuario", referencedColumnName = "id")
-    private Usuario usuario;
+    @JoinColumn(name = "Usuarios_id", referencedColumnName = "id")
+    private Usuario Usuarios_id;
 
     @ManyToOne
-    @JoinColumn(name = "planConsumo", referencedColumnName = "id")
-    private PlanConsumo planConsumo;
+    @JoinColumn(name = "PlanesConsumo_id", referencedColumnName = "id")
+    private PlanConsumo PlanesConsumo_id;
 
-    public ReservaAlojamiento(Date fecha, Integer numNoches, Integer numAdultos, Integer numMenores, Usuario usuario,
-            PlanConsumo planConsumo) {
-        this.fecha = fecha;
-        this.numNoches = numNoches;
-        this.numAdultos = numAdultos;
-        this.numMenores = numMenores;
-        this.usuario = usuario;
-        this.planConsumo = planConsumo;
-    }
+    @ManyToOne
+    @JoinColumn(name = "Habitaciones_id", referencedColumnName = "id")
+    private Habitacion Habitaciones_id;
 
     public ReservaAlojamiento() {;}
 
@@ -54,52 +46,52 @@ public class ReservaAlojamiento {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFechaIn() {
+        return fechaIn;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFechaIn(Date fechaIn) {
+        this.fechaIn = fechaIn;
     }
 
-    public Integer getNumNoches() {
-        return numNoches;
+    public Date getFechaOut() {
+        return fechaOut;
     }
 
-    public void setNumNoches(Integer numNoches) {
-        this.numNoches = numNoches;
+    public void setFechaOut(Date fechaOut) {
+        this.fechaOut = fechaOut;
     }
 
-    public Integer getNumAdultos() {
-        return numAdultos;
+    public Integer getNumPersonas() {
+        return numPersonas;
     }
 
-    public void setNumAdultos(Integer numAdultos) {
-        this.numAdultos = numAdultos;
+    public void setNumPersonas(Integer numPersonas) {
+        this.numPersonas = numPersonas;
     }
 
-    public Integer getNumMenores() {
-        return numMenores;
+    public Usuario getUsuarios_id() {
+        return Usuarios_id;
     }
 
-    public void setNumMenores(Integer numMenores) {
-        this.numMenores = numMenores;
+    public void setUsuarios_id(Usuario usuarios_id) {
+        Usuarios_id = usuarios_id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public PlanConsumo getPlanesConsumo_id() {
+        return PlanesConsumo_id;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setPlanesConsumo_id(PlanConsumo planesConsumo_id) {
+        PlanesConsumo_id = planesConsumo_id;
     }
 
-    public PlanConsumo getPlanConsumo() {
-        return planConsumo;
+    public Habitacion getHabitaciones_id() {
+        return Habitaciones_id;
     }
 
-    public void setPlanConsumo(PlanConsumo planConsumo) {
-        this.planConsumo = planConsumo;
+    public void setHabitaciones_id(Habitacion habitaciones_id) {
+        Habitaciones_id = habitaciones_id;
     }
 
 }

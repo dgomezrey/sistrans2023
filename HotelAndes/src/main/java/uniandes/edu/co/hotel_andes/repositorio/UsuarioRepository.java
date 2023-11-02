@@ -10,27 +10,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 import uniandes.edu.co.hotel_andes.modelo.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    @Query(value = "SELECT * FROM usuarios", nativeQuery = true)
+    @Query(value = "SELECT * FROM Usuarios", nativeQuery = true)
     Collection<Usuario> darUsuarios();
 
-    @Query(value = "SELECT * FROM usuarios WHERE id = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM Usuarios WHERE id = :id", nativeQuery = true)
     Usuario darUsuario(@Param("id") long id);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM usuarios WHERE id = :id", nativeQuery = true)
+    @Query(value = "INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) VALUES ( hotelandes_sequence.nextval , :usuario, :contrasena, :nombre, :email, :tipoDocumento, :documento, :TiposUsuario_id)", nativeQuery = true)
+    void insertarUsuario(@Param("usuario") String usuario, @Param("contrasena") String contrasena,
+            @Param("nombre") String nombre, @Param("email") String email, @Param("tipoDocumento") String tipoDocumento,
+            @Param("documento") String documento, @Param("TiposUsuario_id") long TiposUsuario_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Usuarios SET usuario = :usuario, contrasena = :contrasena, nombre = :nombre, email = :email, tipoDocumento = :tipoDocumento, documento = :documento, TiposUsuario_id = :TiposUsuario_id WHERE id = :id", nativeQuery = true)
+    void actualizarUsuario(@Param("id") long id, @Param("usuario") String usuario,
+            @Param("contrasena") String contrasena, @Param("nombre") String nombre, @Param("email") String email,
+            @Param("tipoDocumento") String tipoDocumento, @Param("documento") String documento,
+            @Param("TiposUsuario_id") long TiposUsuario_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM Usuarios WHERE id = :id", nativeQuery = true)
     void eliminarUsuario(@Param("id") long id);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE usuarios SET nombre = :nombre, apellido = :apellido, documento = :documento, tipoUsuario = :tipoUsuario WHERE id = :id", nativeQuery = true)
-    void actualizarUsuario(@Param("id") long id, @Param("nombre") String nombre, @Param("apellido") String apellido, @Param("documento") String documento, @Param("tipoUsuario") long tipoUsuario);
-
-    @Modifying
-    @Transactional
-    @Query(value = "INSERT INTO usuarios (id, nombre, apellido, documento, tipoUsuario) VALUES ( hotelandesSequence , :nombre, :apellido, :documento, :tipoUsuario)", nativeQuery = true)
-    void insertarUsuario();
-    
 }

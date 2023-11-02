@@ -11,34 +11,37 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "reservasservicios")
+@Table(name = "ReservasServicio")
 public class ReservaServicio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Date fechaInicio;
+    private Date fecha;
 
-    private Date fechaFin;
+    private Date horaInicio;
 
-    @ManyToOne
-    @JoinColumn(name = "reservaAlojamiento", referencedColumnName = "id")
-    private ReservaAlojamiento reservaAlojamiento;
+    private Date horaFin;
 
     @ManyToOne
-    @JoinColumn(name = "servicio", referencedColumnName = "id")
-    private Servicio servicio;
+    @JoinColumn(name = "Servicios_id", referencedColumnName = "id")
+    private Servicio Servicios_id;
 
-    public ReservaServicio(Date fechaInicio, Date fechaFin, ReservaAlojamiento reservaAlojamiento,
-            Servicio servicio) {
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.reservaAlojamiento = reservaAlojamiento;
-        this.servicio = servicio;
-    }
+    @ManyToOne
+    @JoinColumn(name = "Habitaciones_id", referencedColumnName = "id")
+    private Habitacion Habitaciones_id;
 
     public ReservaServicio() {;}
+
+    public ReservaServicio(Date fecha, Date horaInicio, Date horaFin, Servicio servicios_id,
+            Habitacion habitaciones_id) {
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        Servicios_id = servicios_id;
+        Habitaciones_id = habitaciones_id;
+    }
 
     public Integer getId() {
         return id;
@@ -48,36 +51,44 @@ public class ReservaServicio {
         this.id = id;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
-    public Date getFechaFin() {
-        return fechaFin;
+    public Date getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public ReservaAlojamiento getReservaAlojamiento() {
-        return reservaAlojamiento;
+    public Date getHoraFin() {
+        return horaFin;
     }
 
-    public void setReservaAlojamiento(ReservaAlojamiento reservaAlojamiento) {
-        this.reservaAlojamiento = reservaAlojamiento;
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
     }
 
-    public Servicio getServicio() {
-        return servicio;
+    public Servicio getServicios_id() {
+        return Servicios_id;
     }
 
-    public void setServicio(Servicio servicio) {
-        this.servicio = servicio;
+    public void setServicios_id(Servicio servicios_id) {
+        Servicios_id = servicios_id;
+    }
+
+    public Habitacion getHabitaciones_id() {
+        return Habitaciones_id;
+    }
+
+    public void setHabitaciones_id(Habitacion habitaciones_id) {
+        Habitaciones_id = habitaciones_id;
     }
     
 }

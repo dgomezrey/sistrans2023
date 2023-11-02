@@ -1,3 +1,5 @@
+CREATE SEQUENCE hotelandes_sequence;
+
 CREATE TABLE consumos (
     id              NUMBER NOT NULL,
     cantidad        NUMBER NOT NULL,

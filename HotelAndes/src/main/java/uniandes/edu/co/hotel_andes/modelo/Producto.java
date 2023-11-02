@@ -1,30 +1,29 @@
 package uniandes.edu.co.hotel_andes.modelo;
 
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "productos")
+@Table(name = "Productos")
 public class Producto {
 
-
-    
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String nombre;
+
     private float precio;
 
+    public Producto(){;}
 
-    public Producto(Integer id, String nombre, float precio) {
-        this.id = id;
+    public Producto(String nombre, float precio) {
         this.nombre = nombre;
         this.precio = precio;
     }
-
-
-    public Producto(){;}
 
     public Integer getId() {
         return id;
@@ -44,8 +43,5 @@ public class Producto {
     public void setPrecio(float precio) {
         this.precio = precio;
     }
-
-    
-
 
 }

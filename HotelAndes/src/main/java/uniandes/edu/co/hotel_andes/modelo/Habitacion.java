@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="habitaciones")
+@Table(name="Habitaciones")
 public class Habitacion {
 
     @Id
@@ -20,23 +20,20 @@ public class Habitacion {
 
     private Integer piso;
 
-    @ManyToOne
-    @JoinColumn(name = "reservaAlojamiento", referencedColumnName = "id")
-    private ReservaAlojamiento reservaAlojamiento;
+    private Integer ocupada;
 
     @ManyToOne
-    @JoinColumn(name = "tipoHabitacion", referencedColumnName = "id")
-    private TipoHabitacion tipoHabitacion;
-
-
-    public Habitacion(Integer numero, Integer piso, ReservaAlojamiento reservaAlojamiento, TipoHabitacion tipoHabitacion) {
-        this.numero = numero;
-        this.piso = piso;
-        this.reservaAlojamiento = reservaAlojamiento;
-        this.tipoHabitacion = tipoHabitacion;
-    }
+    @JoinColumn(name = "TiposHabitacion_id", referencedColumnName = "id")
+    private TipoHabitacion TiposHabitacion_id;
 
     public Habitacion() {;}
+
+    public Habitacion(Integer numero, Integer piso, Integer ocupada, TipoHabitacion tiposHabitacion_id) {
+        this.numero = numero;
+        this.piso = piso;
+        this.ocupada = ocupada;
+        TiposHabitacion_id = tiposHabitacion_id;
+    }
 
     public Integer getId() {
         return id;
@@ -62,20 +59,20 @@ public class Habitacion {
         this.piso = piso;
     }
 
-    public ReservaAlojamiento getReservaAlojamiento() {
-        return reservaAlojamiento;
+    public Integer getOcupada() {
+        return ocupada;
     }
 
-    public void setReservaAlojamiento(ReservaAlojamiento reservaAlojamiento) {
-        this.reservaAlojamiento = reservaAlojamiento;
+    public void setOcupada(Integer ocupada) {
+        this.ocupada = ocupada;
     }
 
-    public TipoHabitacion getTipoHabitacion() {
-        return tipoHabitacion;
+    public TipoHabitacion getTiposHabitacion_id() {
+        return TiposHabitacion_id;
     }
 
-    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
-        this.tipoHabitacion = tipoHabitacion;
+    public void setTiposHabitacion_id(TipoHabitacion tiposHabitacion_id) {
+        TiposHabitacion_id = tiposHabitacion_id;
     }
-  
+
 }

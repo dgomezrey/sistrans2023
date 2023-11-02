@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "servicios")
+@Table(name = "Servicios")
 public class Servicio {
 
     @Id
@@ -20,13 +20,23 @@ public class Servicio {
 
     private String tipoServicio;
 
-    public Servicio(String nombre, String descripcion, String tipoServicio) {
+    private Float costoPorUnidad;
+
+    private String horario;
+
+    private Integer capacidad;
+
+    public Servicio() {;}
+
+    public Servicio(String nombre, String descripcion, String tipoServicio, Float costoPorUnidad, String horario,
+            Integer capacidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tipoServicio = tipoServicio;
+        this.costoPorUnidad = costoPorUnidad;
+        this.horario = horario;
+        this.capacidad = capacidad;
     }
-
-    public Servicio() {;}
 
     public Integer getId() {
         return id;
@@ -58,6 +68,30 @@ public class Servicio {
 
     public void setTipoServicio(String tipoServicio) {
         this.tipoServicio = tipoServicio;
+    }
+
+    public Float getCostoPorUnidad() {
+        return costoPorUnidad;
+    }
+
+    public void setCostoPorUnidad(Float costoPorUnidad) {
+        this.costoPorUnidad = costoPorUnidad;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public Integer getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(Integer capacidad) {
+        this.capacidad = capacidad;
     }
 
 }
