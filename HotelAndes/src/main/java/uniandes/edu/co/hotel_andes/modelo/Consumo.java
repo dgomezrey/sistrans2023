@@ -25,16 +25,16 @@ public class Consumo {
     private Float total;
 
     @ManyToOne
-    @JoinColumn(name = "Habitaciones_id", referencedColumnName = "id")
-    private Habitacion Habitaciones_id;
+    @JoinColumn(name = "habitaciones_id", referencedColumnName = "id")
+    private Habitacion habitaciones_id;
 
     @ManyToOne
-    @JoinColumn(name = "Servicios_id", referencedColumnName = "id")
-    private Servicio Servicios_id;
+    @JoinColumn(name = "servicios_id", referencedColumnName = "id")
+    private Servicio servicios_id;
 
     @ManyToOne
-    @JoinColumn(name = "Productos_id", referencedColumnName = "id")
-    private Producto Productos_id;
+    @JoinColumn(name = "productos_id", referencedColumnName = "id")
+    private Producto productos_id;
 
     public Consumo() {;}
 
@@ -43,9 +43,9 @@ public class Consumo {
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.total = total;
-        Habitaciones_id = habitaciones_id;
-        Servicios_id = servicios_id;
-        Productos_id = productos_id;
+        habitaciones_id = habitaciones_id;
+        servicios_id = servicios_id;
+        productos_id = productos_id;
     }
 
     public Integer getId() {
@@ -81,27 +81,27 @@ public class Consumo {
     }
 
     public Habitacion getHabitaciones_id() {
-        return Habitaciones_id;
+        return habitaciones_id;
     }
 
     public void setHabitaciones_id(Habitacion habitaciones_id) {
-        Habitaciones_id = habitaciones_id;
+        this.habitaciones_id = habitaciones_id;
     }
 
     public Servicio getServicios_id() {
-        return Servicios_id;
+        return servicios_id;
     }
 
     public void setServicios_id(Servicio servicios_id) {
-        Servicios_id = servicios_id;
+        this.servicios_id = servicios_id;
     }
 
     public Producto getProductos_id() {
-        return Productos_id;
+        return productos_id;
     }
 
     public void setProductos_id(Producto productos_id) {
-        Productos_id = productos_id;
+        this.productos_id = productos_id;
     }
 
 }

@@ -24,13 +24,13 @@ public class Usuario {
 
     private String email;
 
-    private String tipoDocumento;
+    private String tipodocumento;
 
     private String documento;
 
     @ManyToOne
-    @JoinColumn(name = "TiposUsuario_id", referencedColumnName = "id")
-    private TipoUsuario TiposUsuario_id;
+    @JoinColumn(name = "Tiposusuario_id", referencedColumnName = "id")
+    private TipoUsuario tiposusuario_id;
 
     public Usuario() {;}
 
@@ -40,9 +40,9 @@ public class Usuario {
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.email = email;
-        this.tipoDocumento = tipoDocumento;
+        this.tipodocumento = tipoDocumento;
         this.documento = documento;
-        TiposUsuario_id = tiposUsuario_id;
+        this.tiposusuario_id = tiposUsuario_id;
     }
 
     public Integer getId() {
@@ -86,11 +86,11 @@ public class Usuario {
     }
 
     public String getTipoDocumento() {
-        return tipoDocumento;
+        return tipodocumento;
     }
 
     public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
+        this.tipodocumento = tipoDocumento;
     }
 
     public String getDocumento() {
@@ -102,11 +102,11 @@ public class Usuario {
     }
 
     public TipoUsuario getTiposUsuario_id() {
-        return TiposUsuario_id;
+        return tiposusuario_id;
     }
 
     public void setTiposUsuario_id(TipoUsuario tiposUsuario_id) {
-        TiposUsuario_id = tiposUsuario_id;
+        this.tiposusuario_id = tiposUsuario_id;
     }
 
 }

@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ReservasServicio")
+@Table(name = "Reservasservicio")
 public class ReservaServicio {
 
     @Id
@@ -20,27 +20,27 @@ public class ReservaServicio {
 
     private Date fecha;
 
-    private Date horaInicio;
+    private Date horainicio;
 
-    private Date horaFin;
-
-    @ManyToOne
-    @JoinColumn(name = "Servicios_id", referencedColumnName = "id")
-    private Servicio Servicios_id;
+    private Date horafin;
 
     @ManyToOne
-    @JoinColumn(name = "Habitaciones_id", referencedColumnName = "id")
-    private Habitacion Habitaciones_id;
+    @JoinColumn(name = "servicios_id", referencedColumnName = "id")
+    private Servicio servicios_id;
+
+    @ManyToOne
+    @JoinColumn(name = "habitaciones_id", referencedColumnName = "id")
+    private Habitacion habitaciones_id;
 
     public ReservaServicio() {;}
 
     public ReservaServicio(Date fecha, Date horaInicio, Date horaFin, Servicio servicios_id,
             Habitacion habitaciones_id) {
         this.fecha = fecha;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        Servicios_id = servicios_id;
-        Habitaciones_id = habitaciones_id;
+        this.horainicio = horaInicio;
+        this.horafin = horaFin;
+        this.servicios_id = servicios_id;
+        this.habitaciones_id = habitaciones_id;
     }
 
     public Integer getId() {
@@ -60,35 +60,35 @@ public class ReservaServicio {
     }
 
     public Date getHoraInicio() {
-        return horaInicio;
+        return horainicio;
     }
 
     public void setHoraInicio(Date horaInicio) {
-        this.horaInicio = horaInicio;
+        this.horainicio = horaInicio;
     }
 
     public Date getHoraFin() {
-        return horaFin;
+        return horafin;
     }
 
     public void setHoraFin(Date horaFin) {
-        this.horaFin = horaFin;
+        this.horafin = horaFin;
     }
 
     public Servicio getServicios_id() {
-        return Servicios_id;
+        return servicios_id;
     }
 
     public void setServicios_id(Servicio servicios_id) {
-        Servicios_id = servicios_id;
+        this.servicios_id = servicios_id;
     }
 
     public Habitacion getHabitaciones_id() {
-        return Habitaciones_id;
+        return habitaciones_id;
     }
 
     public void setHabitaciones_id(Habitacion habitaciones_id) {
-        Habitaciones_id = habitaciones_id;
+        this.habitaciones_id = habitaciones_id;
     }
     
 }

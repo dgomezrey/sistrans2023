@@ -18,9 +18,9 @@ public class Servicio {
 
     private String descripcion;
 
-    private String tipoServicio;
+    private String tiposervicio;
 
-    private Float costoPorUnidad;
+    private Float costoporunidad;
 
     private String horario;
 
@@ -32,8 +32,8 @@ public class Servicio {
             Integer capacidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tipoServicio = tipoServicio;
-        this.costoPorUnidad = costoPorUnidad;
+        this.tiposervicio = tipoServicio;
+        this.costoporunidad = costoPorUnidad;
         this.horario = horario;
         this.capacidad = capacidad;
     }
@@ -63,19 +63,19 @@ public class Servicio {
     }
 
     public String getTipoServicio() {
-        return tipoServicio;
+        return tiposervicio;
     }
 
     public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
+        this.tiposervicio = tipoServicio;
     }
 
     public Float getCostoPorUnidad() {
-        return costoPorUnidad;
+        return costoporunidad;
     }
 
     public void setCostoPorUnidad(Float costoPorUnidad) {
-        this.costoPorUnidad = costoPorUnidad;
+        this.costoporunidad = costoPorUnidad;
     }
 
     public String getHorario() {
@@ -92,6 +92,11 @@ public class Servicio {
 
     public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombre+"|"+this.descripcion+"|"+this.tiposervicio+"|"+this.costoporunidad+"|"+this.horario+"|"+this.capacidad;
     }
 
 }
