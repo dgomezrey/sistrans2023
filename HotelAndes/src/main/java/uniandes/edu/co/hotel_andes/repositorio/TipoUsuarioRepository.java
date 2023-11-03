@@ -13,7 +13,7 @@ import uniandes.edu.co.hotel_andes.modelo.TipoUsuario;
 public interface TipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer> {
 
     @Query(value = "SELECT * FROM TiposUsuario", nativeQuery = true)
-    Collection<TipoUsuario> darTiposUsuarios();
+    Collection<TipoUsuario> darTiposUsuario();
 
     @Query(value = "SELECT * FROM TiposUsuario WHERE id = :id", nativeQuery = true)
     TipoUsuario darTipoUsuario(@Param("id") long id);

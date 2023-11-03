@@ -40,4 +40,11 @@ public interface ReservaAlojamientoRepository extends JpaRepository<ReservaAloja
     @Query(value = "DELETE FROM ReservasAlojamiento WHERE id = :id", nativeQuery = true)
     void eliminarReservaAlojamiento(@Param("id") long id);
 
+    @Query(value = "SELECT * FROM ReservasAlojamiento WHERE Usuarios_id = :id", nativeQuery = true)
+    Collection<ReservaAlojamiento> darReservasAlojamientoUsuario(@Param("id") long id);
+
+    @Query(value = "SELECT * FROM ReservasAlojamiento WHERE Habitaciones_id = :idHabitacion AND fechain >= TO_DATE(:fechaIn, 'YYYY-MM-DD') AND fechaOut <= TO_DATE(:fechaOut, 'YYYY-MM-DD')", nativeQuery = true)
+    Collection<ReservaAlojamiento> darReservasAlojamientoHabitacion(@Param("idHabitacion") long idHabitacion,
+            @Param("fechaIn") String fechaIn, @Param("fechaOut") String fechaOut);
+
 }
