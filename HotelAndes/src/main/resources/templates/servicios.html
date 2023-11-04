@@ -6,15 +6,15 @@
     <title>Servicios</title>
     <link
       rel="stylesheet"
-      type="text/css"
       th:href="@{/css/bootstrap.min.css}"
     />
+    <script th:src="@{/js/bootstrap.min.js}"></script>
   </head>
   <body>
-    <div>
+    <div class="text-center">
       <h1>Lista de Servicios</h1>
       <table class="table table-hover table-bordered">
-        <thead class="thead-dark">
+        <thead class="table-dark">
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Nombre</th>
@@ -51,6 +51,7 @@
           </tr>
         </th:block>
       </table>
+      <a th:href="@{/servicios/new}" class="btn btn-primary">Agregar Servicio</a>
       <div>
         <a th:href="@{/}" class="btn btn-primary">Volver</a>
       </div>

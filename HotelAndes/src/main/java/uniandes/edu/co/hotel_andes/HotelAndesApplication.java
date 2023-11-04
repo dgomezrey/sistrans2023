@@ -9,15 +9,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import uniandes.edu.co.hotel_andes.modelo.Servicio;
-import uniandes.edu.co.hotel_andes.repositorio.ServicioRepository;
+import uniandes.edu.co.hotel_andes.modelo.Habitacion;
+import uniandes.edu.co.hotel_andes.repositorio.HabitacionRepository;
 
 
 @SpringBootApplication
 public class HotelAndesApplication  implements CommandLineRunner {
  
 	@Autowired
-	private ServicioRepository servicioRepository;
+	private HabitacionRepository habitacionRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HotelAndesApplication.class, args);
@@ -25,9 +25,9 @@ public class HotelAndesApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg) {
-		Collection<Servicio> servicios = servicioRepository.darServicios();
-		for (Servicio servicio : servicios) {
-			System.out.println(servicio);
+		Collection<Habitacion> habitaciones = habitacionRepository.darHabitaciones();
+		for (Habitacion habitacion : habitaciones) {
+			System.out.println(habitacion.getNumero());
 		}
 
 	}
