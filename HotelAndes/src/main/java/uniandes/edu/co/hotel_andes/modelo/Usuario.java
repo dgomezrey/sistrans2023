@@ -1,5 +1,6 @@
 package uniandes.edu.co.hotel_andes.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +17,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String usuario;
+    @Column(name = "usuario")
+    private String username;
 
     private String contrasena;
 
@@ -34,9 +36,9 @@ public class Usuario {
 
     public Usuario() {;}
 
-    public Usuario(String usuario, String contrasena, String nombre, String email, String tipoDocumento,
+    public Usuario(String username, String contrasena, String nombre, String email, String tipoDocumento,
             String documento, TipoUsuario tiposUsuario_id) {
-        this.usuario = usuario;
+        this.username = username;
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.email = email;
@@ -53,12 +55,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getContrasena() {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragmento</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+  </head>
+  <body>
+    <div
+      th:fragment="habitacionForm(titulo)"
+      class="container border border-2 w-25"
+    >
+      <h1 class="text-center" th:text="${titulo}"></h1>
+      <form>
+        <label class="col-form-label">Numero</label>
+        <input
+          class="form-control"
+          type="number"
+          id="numero"
+          name="numero"
+          required
+          th:value="${habitacion.numero}"
+        />
+        <label class="col-form-label">Piso</label>
+        <input
+          class="form-control"
+          type="number"
+          id="piso"
+          name="piso"
+          required
+          th:value="${habitacion.piso}"
+        />
+        <label class="col-form-label">¿Habitación Ocupada?</label>
+        <input
+          class="checkbox"
+          type="checkbox"
+          id="ocupadaCheckbox"
+          onchange="document.getElementById('ocupada').value = this.checked ? 1 : 0;"
+        />
+        <input
+          type="hidden"
+          id="ocupada"
+          name="ocupada"
+          th:value="${habitacion.ocupada != null ? (habitacion.ocupada instanceof T(java.lang.Boolean) ? (habitacion.ocupada ? 1 : 0) : habitacion.ocupada) : 0
+          }"
+        />
+        <br />
+        <label class="col-form-label">Tipo Habitacion</label>
+        <select
+          class="form-control"
+          id="tiposHabitacion_id"
+          name="tiposHabitacion_id"
+          required
+        >
+          <option
+            th:each="tipo : ${tipos}"
+            th:value="${tipo.id}"
+            th:text="${tipo.tipo}"
+          ></option>
+        </select>
+        <div class="text-center">
+          <input type="submit" class="btn btn-primary" value="Guardar" />
+          <a th:href="@{/habitaciones}" class="btn btn-primary">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

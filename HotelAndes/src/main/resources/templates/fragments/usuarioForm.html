@@ -21,10 +21,10 @@
         <input
           class="form-control"
           type="text"
-          id="usuario"
-          name="usuario"
+          id="username"
+          name="username"
           required
-          th:value="${usuario.usuario}"
+          th:value="${usuario.username}"
         />
         <label class="col-form-label">Contraseña</label>
         <input
@@ -68,9 +68,9 @@
           </option>
           <option
             value="LICENSIA"
-            th:selected="${usuario.tipoDocumento eq 'LICENSIA'}"
+            th:selected="${usuario.tipoDocumento eq 'LICENCIA'}"
           >
-            Licensia de conducción
+            Licencia de conducción
           </option>
           <option
             value="PASAPORTE"
@@ -92,6 +92,18 @@
           th:value="${usuario.documento}"
         />
         <label class="col-form-label">Tipo Usuario</label>
+        <select
+          class="form-control"
+          id="tiposUsuario_id"
+          name="tiposUsuario_id"
+          required
+        >
+          <option
+            th:each="tipo : ${tipos}"
+            th:value="${tipo.id}"
+            th:text="${tipo.tipo}"
+          ></option>
+        </select>
 
         <div class="text-center">
           <input type="submit" class="btn btn-primary" value="Guardar" />
