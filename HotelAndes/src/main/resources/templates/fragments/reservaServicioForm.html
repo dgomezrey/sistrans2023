@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragmento</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div
+      th:fragment="reservaServicioForm(titulo)"
+      class="container border border-2 w-25"
+    >
+      <h1 class="text-center" th:text="${titulo}"></h1>
+      <form>
+        <label class="col-form-label">Fecha</label>
+        <input
+          class="form-control"
+          type="date"
+          id="fecha"
+          name="fecha"
+          required
+          th:value="${reservaServicio.fecha}"
+        />
+        <label class="col-form-label">Hora Inicio</label>
+        <input
+          class="form-control"
+          type="date"
+          id="horaInicio"
+          name="horaInicio"
+          required
+          th:value="${reservaServicio.horaInicio}"
+        />
+        <label class="col-form-label">Hora Fin</label>
+        <input
+          class="form-control"
+          type="date"
+          id="horaFin"
+          name="horaFin"
+          required
+          th:value="${reservaServicio.horaFin}"
+        />
+        <label class="col-form-label">Servicio</label>
+        <select
+          class="form-control"
+          id="servicios_id"
+          name="servicios_id"
+          required
+        >
+          <option
+            th:each="servicio : ${servicios}"
+            th:value="${servicio.id}"
+            th:text="${servicio.nombre}"
+          ></option>
+        </select>
+        <label class="col-form-label">Habitacion</label>
+        <select
+          class="form-control"
+          id="habitaciones_id"
+          name="habitaciones_id"
+          required
+        >
+          <option
+            th:each="habitacion : ${habitaciones}"
+            th:value="${habitacion.id}"
+            th:text="${habitacion.numero}"
+          ></option>
+        </select>
+        <div class="text-center">
+          <br />
+          <input type="submit" class="btn btn-primary" value="Guardar" />
+          <a th:href="@{/reservasServicio}" class="btn btn-primary">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

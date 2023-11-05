@@ -1,5 +1,9 @@
 package uniandes.edu.co.hotel_andes.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,4 +79,9 @@ public class ReservasServicioController {
         return "redirect:/reservasServicio";
     }
 
+    private java.sql.Date convertToSqlDate(String datetime) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm"); // Adjust if the format is different
+        Date date = sdf.parse(datetime);
+    return new java.sql.Date(date.getTime());
+    }
 }

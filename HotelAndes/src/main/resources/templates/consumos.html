@@ -37,7 +37,7 @@
             <td th:text="${consumo.productos_id.nombre}"></td>
             <td>
               <a
-                th:href="@{consumos/{id}/edit(id=${consumos.id})}"
+                th:href="@{consumos/{id}/edit(id=${consumo.id})}"
                 class="btn btn-primary"
                 >Editar</a
               >
@@ -55,7 +55,6 @@
         <a th:href="@{/consumos/new}" class="btn btn-primary"
           >Crear nuevo consumo</a
         >
-      <div>
         <a th:href="@{/}" class="btn btn-primary">Volver</a>
       </div>
     </div>

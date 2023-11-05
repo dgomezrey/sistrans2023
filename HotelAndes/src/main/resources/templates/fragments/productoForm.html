@@ -4,28 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fragmento</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
   </head>
   <body>
     <div
-      th:fragment="tipoUsuarioForm(titulo)"
+      th:fragment="productoForm(titulo)"
       class="container border border-2 w-25"
     >
       <h1 class="text-center" th:text="${titulo}"></h1>
       <form>
-        <label class="col-form-label">Tipo</label>
+        <label class="col-form-label">Nombre</label>
         <input
           class="form-control"
           type="text"
-          id="tipo"
-          name="tipo"
+          id="nombre"
+          name="nombre"
           required
-          th:value="${tipoUsuario.tipo}"
+          th:value="${producto.nombre}"
+        />
+        <label class="col-form-label">Precio</label>
+        <input
+          class="form-control"
+          type="number"
+          id="precio"
+          name="precio"
+          required
+          th:value="${producto.precio}"
         />
         <div class="text-center">
           <br />
           <input type="submit" class="btn btn-primary" value="Guardar" />
-          <a th:href="@{/tiposUsuario}" class="btn btn-primary">Cancelar</a>
+          <a th:href="@{/productos}" class="btn btn-primary">Cancelar</a>
         </div>
       </form>
     </div>

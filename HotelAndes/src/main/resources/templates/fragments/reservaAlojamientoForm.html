@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragmento</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div
+      th:fragment="reservaAlojamientoForm(titulo)"
+      class="container border border-2 w-25"
+    >
+      <h1 class="text-center" th:text="${titulo}"></h1>
+      <form>
+        <label class="col-form-label">Fecha Llegada</label>
+        <input
+          class="form-control"
+          type="date"
+          id="fechaIn"
+          name="fechaIn"
+          required
+          th:value="${reservaAlojamiento.fechaIn}"
+        />
+        <label class="col-form-label">Fecha Salida</label>
+        <input
+          class="form-control"
+          type="date"
+          id="fechaOut"
+          name="fechaOut"
+          required
+          th:value="${reservaAlojamiento.fechaOut}"
+        />
+        <label class="col-form-label">Huespedes</label>
+        <input
+          class="form-control"
+          type="number"
+          id="numPersonas"
+          name="numPersonas"
+          required
+          th:value="${reservaAlojamiento.numPersonas}"
+        />
+        <label class="col-form-label">Usuario</label>
+        <select
+          class="form-control"
+          id="usuarios_id"
+          name="usuarios_id"
+          required
+        >
+          <option
+            th:each="usuario : ${usuarios}"
+            th:value="${usuario.id}"
+            th:text="${usuario.username}"
+          ></option>
+        </select>
+        <label class="col-form-label">Plan consumo</label>
+        <select
+          class="form-control"
+          id="planesConsumo_id"
+          name="planesConsumo_id"
+        >
+          <option
+            th:each="plan:${planesConsumo}"
+            th:if="${plan.nombre == 'Estandar'}"
+            th:value="${plan.id}"
+            th:text="${plan.nombre}"
+          ></option>
+          <option
+            th:each="plan:${planesConsumo}"
+            th:unless="${plan.nombre == 'Estandar'}"
+            th:value="${plan.id}"
+            th:text="${plan.nombre}"
+          ></option>
+        </select>
+        <label class="col-form-label">Habitacion</label>
+        <select
+          class="form-control"
+          id="habitaciones_id"
+          name="habitaciones_id"
+        >
+          <option
+            th:each="habitacion : ${habitaciones}"
+            th:value="${habitacion.id}"
+            th:text="${habitacion.numero}"
+          ></option>
+        </select>
+        <div class="text-center">
+          <br />
+          <input type="submit" class="btn btn-primary" value="Guardar" />
+          <a th:href="@{/reservasAlojamiento}" class="btn btn-primary"
+            >Cancelar</a
+          >
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

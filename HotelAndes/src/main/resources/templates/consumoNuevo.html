@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Consumo</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <form action="#" th:action="@{/consumos/new/save}" method="post">
+        <div
+          th:replace="~{fragments/consumoForm :: consumoForm(titulo='Crear Consumo')}"
+        ></div>
+      </form>
+</body>
+</html>
