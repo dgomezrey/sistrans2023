@@ -20,9 +20,9 @@ public class ReservaServicio {
 
     private Date fecha;
 
-    private Date horainicio;
+    private String horainicio;
 
-    private Date horafin;
+    private String horafin;
 
     @ManyToOne
     @JoinColumn(name = "servicios_id", referencedColumnName = "id")
@@ -34,7 +34,7 @@ public class ReservaServicio {
 
     public ReservaServicio() {;}
 
-    public ReservaServicio(Date fecha, Date horaInicio, Date horaFin, Servicio servicios_id,
+    public ReservaServicio(Date fecha, String horaInicio, String horaFin, Servicio servicios_id,
             Habitacion habitaciones_id) {
         this.fecha = fecha;
         this.horainicio = horaInicio;
@@ -59,19 +59,19 @@ public class ReservaServicio {
         this.fecha = fecha;
     }
 
-    public Date getHoraInicio() {
+    public String getHoraInicio() {
         return horainicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         this.horainicio = horaInicio;
     }
 
-    public Date getHoraFin() {
+    public String getHoraFin() {
         return horafin;
     }
 
-    public void setHoraFin(Date horaFin) {
+    public void setHoraFin(String horaFin) {
         this.horafin = horaFin;
     }
 

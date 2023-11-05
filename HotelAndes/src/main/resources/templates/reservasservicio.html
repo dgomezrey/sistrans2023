@@ -29,8 +29,8 @@
           <tr>
             <td th:text="${reserva.id}"></td>
             <td th:text="${reserva.fecha}"></td>
-            <td th:text="${reserva.horaInicio}"></td>
-            <td th:text="${reserva.horaFin}"></td>
+            <td th:text="${#strings.substring(reserva.horaInicio, 11, 16)}"></td>
+            <td th:text="${#strings.substring(reserva.horaFin, 11, 16)}"></td>
             <td th:text="${reserva.servicios_id.nombre}"></td>
             <td th:text="${reserva.habitaciones_id.numero}"></td>
             <td>
