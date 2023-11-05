@@ -29,7 +29,7 @@
             <td th:text="${habitacion.id}"></td>
             <td th:text="${habitacion.numero}"></td>
             <td th:text="${habitacion.piso}"></td>
-            <td th:text="${habitacion.ocupada}"></td>
+            <td th:text="${habitacion.ocupada == 1 ? 'Ocupada' : 'Disponible'}"></td>
             <td th:text="${habitacion.tiposHabitacion_id.tipo}"></td>
             <td>
               <a
