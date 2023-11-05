@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar servicio</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <form th:action="@{'/servicios/'+${servicio.id}+'/edit/save'}" th:object="${servicio}" method="post">
+        <div th:replace="~{fragments/servicioForm :: servicioForm(titulo='Editar Servicio', servicio=${servicio})}" ></div>
+</body>
+</html>

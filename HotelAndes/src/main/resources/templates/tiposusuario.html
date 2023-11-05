@@ -18,6 +18,7 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Tipo</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <th:block th:each="tipo:${tiposUsuario}">
@@ -40,8 +41,11 @@
           </tr>
         </th:block>
       </table>
-      <a th:href="@{/tiposUsuario/new}" class="btn btn-primary">Agregar Tipo de Usuario</a>
+
       <div>
+        <a th:href="@{/tiposUsuario/new}" class="btn btn-primary"
+          >Agregar Tipo de Usuario</a
+        >
         <a th:href="@{/}" class="btn btn-primary">Volver</a>
       </div>
     </div>

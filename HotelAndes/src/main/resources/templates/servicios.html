@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Servicios</title>
-    <link
-      rel="stylesheet"
-      th:href="@{/css/bootstrap.min.css}"
-    />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <script th:src="@{/js/bootstrap.min.js}"></script>
   </head>
   <body>
@@ -51,8 +48,11 @@
           </tr>
         </th:block>
       </table>
-      <a th:href="@{/servicios/new}" class="btn btn-primary">Agregar Servicio</a>
+
       <div>
+        <a th:href="@{/servicios/new}" class="btn btn-primary"
+          >Agregar Servicio</a
+        >
         <a th:href="@{/}" class="btn btn-primary">Volver</a>
       </div>
     </div>
