@@ -20,7 +20,7 @@ public interface TipoHabitacionRepository extends JpaRepository<TipoHabitacion, 
 
         @Modifying
         @Transactional
-        @Query(value = "INSERT INTO Tiposhabitacion (id, tipo, capacidad, camas, costopornoche) VALUES ( hotelandes_sequence.nextval , :tipo, :capacidad, :camas, :costoPorNoche)", nativeQuery = true)
+        @Query(value = "INSERT INTO Tiposhabitacion (id, tipo, capacidad, camas, costopornoche) VALUES ( tiposhabitacion_sequence.nextval , :tipo, :capacidad, :camas, :costoPorNoche)", nativeQuery = true)
         void insertarTipoHabitacion(@Param("tipo") String tipo, @Param("capacidad") Integer capacidad,
                         @Param("camas") Integer camas, @Param("costoPorNoche") Float costoPorNoche);
 

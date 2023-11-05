@@ -21,7 +21,7 @@ public interface ReservaServicioRepository extends JpaRepository<ReservaServicio
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ReservasServicio (id, fecha, horaInicio, horaFin, Servicios_id, Habitaciones_id) VALUES ( hotelandes_sequence.nextval , :fecha, :horaInicio, :horaFin, :Servicios_id, :Habitaciones_id)", nativeQuery = true)
+    @Query(value = "INSERT INTO ReservasServicio (id, fecha, horaInicio, horaFin, Servicios_id, Habitaciones_id) VALUES ( reservasservicio_sequence.nextval , :fecha, :horaInicio, :horaFin, :Servicios_id, :Habitaciones_id)", nativeQuery = true)
     void insertarReservaServicio(@Param("fecha") Date fecha, @Param("horaInicio") Date horaInicio,
             @Param("horaFin") Date horaFin, @Param("Servicios_id") long Servicios_id,
             @Param("Habitaciones_id") long Habitaciones_id);

@@ -22,7 +22,7 @@ public interface ReservaAlojamientoRepository extends JpaRepository<ReservaAloja
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ReservasAlojamiento (id, fechaIn, fechaOut, numPersonas, Usuarios_id, PlanesConsumo_id, Habitaciones_id) VALUES ( hotelandes_sequence.nextval , :fechaIn, :fechaOut, :numPersonas, :Usuarios_id, :PlanesConsumo_id, :Habitaciones_id)", nativeQuery = true)
+    @Query(value = "INSERT INTO ReservasAlojamiento (id, fechaIn, fechaOut, numPersonas, Usuarios_id, PlanesConsumo_id, Habitaciones_id) VALUES ( reservasalojamiento_sequence.nextval , :fechaIn, :fechaOut, :numPersonas, :Usuarios_id, :PlanesConsumo_id, :Habitaciones_id)", nativeQuery = true)
     void insertarReservaAlojamiento(@Param("fechaIn") Date fechaIn, @Param("fechaOut") Date fechaOut,
             @Param("numPersonas") Integer numPersonas, @Param("Usuarios_id") long Usuarios_id,
             @Param("PlanesConsumo_id") long PlanesConsumo_id, @Param("Habitaciones_id") long Habitaciones_id);

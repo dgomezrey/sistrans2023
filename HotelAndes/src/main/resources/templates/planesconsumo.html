@@ -30,17 +30,19 @@
             <td th:text="${plan.descripcion}"></td>
             <td th:text="${plan.descuento}"></td>
             <td>
-              <a
-                th:href="@{planesConsumo/{id}/edit(id=${plan.id})}"
-                class="btn btn-primary"
-                >Editar</a
-              >
-              <a
-                th:href="@{planesConsumo/{id}/delete(id=${plan.id})}"
-                onclick="return confirm('¿Borrar este Plan de Consumo?')"
-                class="btn btn-danger"
-                >Eliminar</a
-              >
+              <div th:if="${!(plan.nombre == 'Estandar')}">
+                <a
+                  th:href="@{planesConsumo/{id}/edit(id=${plan.id})}"
+                  class="btn btn-primary"
+                  >Editar</a
+                >
+                <a
+                  th:href="@{planesConsumo/{id}/delete(id=${plan.id})}"
+                  onclick="return confirm('¿Borrar este Plan de Consumo?')"
+                  class="btn btn-danger"
+                  >Eliminar</a
+                >
+              </div>
             </td>
           </tr>
         </th:block>

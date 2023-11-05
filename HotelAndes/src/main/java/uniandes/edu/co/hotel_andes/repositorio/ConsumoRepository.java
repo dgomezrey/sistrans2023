@@ -21,7 +21,7 @@ public interface ConsumoRepository extends JpaRepository<Consumo, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO Consumos (id, cantidad, fecha, total, Habitaciones_id, Servicios_id, Productos_id) VALUES ( hotelandes_sequence.nextval , :cantidad, :fecha, :total, :Habitaciones_id, :Servicios_id, :Productos_id)", nativeQuery = true)
+    @Query(value = "INSERT INTO Consumos (id, cantidad, fecha, total, Habitaciones_id, Servicios_id, Productos_id) VALUES ( consumos_sequence.nextval , :cantidad, :fecha, :total, :Habitaciones_id, :Servicios_id, :Productos_id)", nativeQuery = true)
     void insertarConsumo(@Param("cantidad") Integer cantidad, @Param("fecha") Date fecha,
             @Param("total") Float total, @Param("Habitaciones_id") long Habitaciones_id,
             @Param("Servicios_id") long Servicios_id, @Param("Productos_id") long Productos_id);
