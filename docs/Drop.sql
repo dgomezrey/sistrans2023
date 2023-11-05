@@ -1,4 +1,13 @@
-DROP SEQUENCE hotelandes_sequence;
+DROP SEQUENCE tiposusuario_sequence;
+DROP SEQUENCE usuarios_sequence;
+DROP SEQUENCE tiposhabitacion_sequence;
+DROP SEQUENCE habitaciones_sequence;
+DROP SEQUENCE servicios_sequence;
+DROP SEQUENCE planesconsumo_sequence;
+DROP SEQUENCE reservasalojamiento_sequence;
+DROP SEQUENCE reservasservicio_sequence;
+DROP SEQUENCE consumos_sequence;
+DROP SEQUENCE productos_sequence;
 
 DROP TABLE consumos CASCADE CONSTRAINTS;
 
@@ -21,3 +30,5 @@ DROP TABLE tiposhabitacion CASCADE CONSTRAINTS;
 DROP TABLE tiposusuario CASCADE CONSTRAINTS;
 
 DROP TABLE usuarios CASCADE CONSTRAINTS;
+
+COMMIT;

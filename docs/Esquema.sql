@@ -1,4 +1,13 @@
-CREATE SEQUENCE hotelandes_sequence;
+CREATE SEQUENCE tiposusuario_sequence;
+CREATE SEQUENCE usuarios_sequence;
+CREATE SEQUENCE tiposhabitacion_sequence;
+CREATE SEQUENCE habitaciones_sequence;
+CREATE SEQUENCE servicios_sequence;
+CREATE SEQUENCE planesconsumo_sequence;
+CREATE SEQUENCE reservasalojamiento_sequence;
+CREATE SEQUENCE reservasservicio_sequence;
+CREATE SEQUENCE consumos_sequence;
+CREATE SEQUENCE productos_sequence;
 
 CREATE TABLE consumos (
     id              NUMBER NOT NULL,
@@ -173,3 +182,9 @@ ALTER TABLE reservasservicio
 ALTER TABLE usuarios
     ADD CONSTRAINT usuarios_tiposusuario_fk FOREIGN KEY ( tiposusuario_id )
         REFERENCES tiposusuario ( id );
+        
+INSERT INTO PlanesConsumo (id, nombre, descripcion) VALUES ( planesconsumo_sequence.nextval , 'Estandar', 'Estandar');
+
+INSERT INTO Productos (id, nombre, precio) VALUES ( productos_sequence.nextval , 'Sin Producto', 0);
+
+COMMIT;
