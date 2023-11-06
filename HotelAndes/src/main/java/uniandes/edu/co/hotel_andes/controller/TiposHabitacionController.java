@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import uniandes.edu.co.hotel_andes.modelo.TipoHabitacion;
+import uniandes.edu.co.hotel_andes.modelo.Usuario;
 import uniandes.edu.co.hotel_andes.repositorio.TipoHabitacionRepository;
 
 @Controller
@@ -18,9 +20,16 @@ public class TiposHabitacionController {
     private TipoHabitacionRepository tipoHabitacionRepository;
 
     @GetMapping("/tiposHabitacion")
-    public String tiposHabitacion(Model model) {
-        model.addAttribute("tiposHabitacion", tipoHabitacionRepository.darTiposHabitacion());
-        return "tiposHabitacion";
+    public String tiposHabitacion(Model model, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("loggedInUser");
+        String tipo = user.getTiposUsuario_id().getTipo();
+        if (user != null && (tipo.equals("Administrador") || tipo.equals("Gerente"))) {
+            model.addAttribute("tiposHabitacion", tipoHabitacionRepository.darTiposHabitacion());
+            return "tiposHabitacion";
+        } else {
+            return "redirect:/home";
+        }
+
     }
 
     @GetMapping("/tiposHabitacion/new")

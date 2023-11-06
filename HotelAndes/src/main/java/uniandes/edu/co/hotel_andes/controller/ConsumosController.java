@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import uniandes.edu.co.hotel_andes.modelo.Consumo;
+import uniandes.edu.co.hotel_andes.modelo.Usuario;
 import uniandes.edu.co.hotel_andes.repositorio.ConsumoRepository;
 import uniandes.edu.co.hotel_andes.repositorio.HabitacionRepository;
 import uniandes.edu.co.hotel_andes.repositorio.ServicioRepository;
@@ -30,9 +32,16 @@ public class ConsumosController {
     private ProductoRepository productoRepository;
 
     @GetMapping("/consumos")
-    public String consumos(Model model) {
-        model.addAttribute("consumos", consumoRepository.darConsumos());
-        return "consumos";
+    public String consumos(Model model, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("loggedInUser");
+        String tipo = user.getTiposUsuario_id().getTipo();
+        if (user != null && (tipo.equals("Empleado") || tipo.equals("Gerente"))) {
+            model.addAttribute("consumos", consumoRepository.darConsumos());
+            return "consumos";
+        } else {
+            return "redirect:/home";
+        }
+
     }
 
     @GetMapping("/consumos/new")

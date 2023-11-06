@@ -13,18 +13,34 @@
   <body>
     <div class="container mx-auto w-50">
       <h1 class="text-center">Hotel Andes</h1>
-      <div>
-        <a th:href="@{/tiposUsuario}" class="btn btn-primary">Tipos Usuario</a>
-        <a th:href="@{/usuarios}" class="btn btn-primary">Usuarios</a>
-        <a th:href="@{/tiposHabitacion}" class="btn btn-primary">Tipos Habitacion</a>
-        <a th:href="@{/habitaciones}" class="btn btn-primary">Habitaciones</a>
-        <a th:href="@{/servicios}" class="btn btn-primary">Servicios</a>
-        <a th:href="@{/planesConsumo}" class="btn btn-primary">Planes Consumo</a>
-        <a th:href="@{/reservasAlojamiento}" class="btn btn-primary">Reservas Alojamiento</a>
-        <a th:href="@{/reservasServicio}" class="btn btn-primary">Reservas Servicio</a>
-        <a th:href="@{/consumos}" class="btn btn-primary">Consumos</a>
-        <a th:href="@{/productos}" class="btn btn-primary">Productos</a>
+      <div class="login-form container border border-2 w-50">
+        <h2>Iniciar Sesión</h2>
+        <form action="/login" method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              id="usuario"
+              name="usuario"
+              placeholder="Nombre de Usuario"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="contraseña"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <br />
+            <button type="submit">Iniciar Sesión</button>
+          </div>
+        </form>
       </div>
+
     </div>
   </body>
 </html>

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import uniandes.edu.co.hotel_andes.modelo.PlanConsumo;
+import uniandes.edu.co.hotel_andes.modelo.Usuario;
 import uniandes.edu.co.hotel_andes.repositorio.PlanConsumoRepository;
 
 @Controller
@@ -18,9 +20,16 @@ public class PlanesConsumoController {
     private PlanConsumoRepository planConsumoRepository;
 
     @GetMapping("/planesConsumo")
-    public String planesConsumo(Model model) {
-        model.addAttribute("planesConsumo", planConsumoRepository.darPlanesConsumo());
-        return "planesConsumo";
+    public String planesConsumo(Model model, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("loggedInUser");
+        String tipo = user.getTiposUsuario_id().getTipo();
+        if (user != null && (tipo.equals("Administrador") || tipo.equals("Gerente"))) {
+            model.addAttribute("planesConsumo", planConsumoRepository.darPlanesConsumo());
+            return "planesConsumo";
+        } else {
+            return "redirect:/home";
+        }
+
     }
 
     @GetMapping("/planesConsumo/new")

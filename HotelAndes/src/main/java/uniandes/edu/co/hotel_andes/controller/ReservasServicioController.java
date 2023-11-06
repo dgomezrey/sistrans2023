@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import uniandes.edu.co.hotel_andes.modelo.ReservaServicio;
+import uniandes.edu.co.hotel_andes.modelo.Usuario;
 import uniandes.edu.co.hotel_andes.repositorio.ReservaServicioRepository;
 import uniandes.edu.co.hotel_andes.repositorio.ServicioRepository;
 import uniandes.edu.co.hotel_andes.repositorio.HabitacionRepository;
@@ -30,9 +32,16 @@ public class ReservasServicioController {
     private HabitacionRepository habitacionRepository;
 
     @GetMapping("/reservasServicio")
-    public String reservasServicio(Model model) {
-        model.addAttribute("reservasServicio", reservaServicioRepository.darReservasServicio());
-        return "reservasServicio";
+    public String reservasServicio(Model model, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("loggedInUser");
+        String tipo = user.getTiposUsuario_id().getTipo();
+        if (user != null && tipo.equals("Gerente")) {
+            model.addAttribute("reservasServicio", reservaServicioRepository.darReservasServicio());
+            return "reservasServicio";
+        } else {
+            return "redirect:/home";
+        }
+
     }
 
     @GetMapping("/reservasServicio/new")
@@ -82,6 +91,6 @@ public class ReservasServicioController {
     private java.sql.Date convertToSqlDate(String datetime) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm"); // Adjust if the format is different
         Date date = sdf.parse(datetime);
-    return new java.sql.Date(date.getTime());
+        return new java.sql.Date(date.getTime());
     }
 }

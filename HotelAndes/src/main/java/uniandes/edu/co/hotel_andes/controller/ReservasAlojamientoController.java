@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import uniandes.edu.co.hotel_andes.modelo.ReservaAlojamiento;
+import uniandes.edu.co.hotel_andes.modelo.Usuario;
 import uniandes.edu.co.hotel_andes.repositorio.ReservaAlojamientoRepository;
 import uniandes.edu.co.hotel_andes.repositorio.UsuarioRepository;
 import uniandes.edu.co.hotel_andes.repositorio.PlanConsumoRepository;
@@ -30,9 +32,16 @@ public class ReservasAlojamientoController {
     private HabitacionRepository habitacionRepository;
 
     @GetMapping("/reservasAlojamiento")
-    public String reservasAlojamiento(Model model) {
-        model.addAttribute("reservasAlojamiento", reservaAlojamientoRepository.darReservasAlojamiento());
-        return "reservasAlojamiento";
+    public String reservasAlojamiento(Model model, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("loggedInUser");
+        String tipo = user.getTiposUsuario_id().getTipo();
+        if (user != null && tipo.equals("Gerente")) {
+            model.addAttribute("reservasAlojamiento", reservaAlojamientoRepository.darReservasAlojamiento());
+            return "reservasAlojamiento";
+        } else {
+            return "redirect:/home";
+        }
+
     }
 
     @GetMapping("/reservasAlojamiento/new")

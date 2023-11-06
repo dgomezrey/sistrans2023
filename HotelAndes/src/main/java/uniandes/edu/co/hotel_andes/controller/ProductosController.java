@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import uniandes.edu.co.hotel_andes.modelo.Producto;
+import uniandes.edu.co.hotel_andes.modelo.Usuario;
 import uniandes.edu.co.hotel_andes.repositorio.ProductoRepository;
 
 @Controller
@@ -18,9 +20,16 @@ public class ProductosController {
     private ProductoRepository productoRepository;
 
     @GetMapping("/productos")
-    public String productos(Model model) {
-        model.addAttribute("productos", productoRepository.darProductos());
-        return "productos";
+    public String productos(Model model, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("loggedInUser");
+        String tipo = user.getTiposUsuario_id().getTipo();
+        if (user != null && (tipo.equals("Administrador") || tipo.equals("Gerente") || tipo.equals("Empleado"))) {
+            model.addAttribute("productos", productoRepository.darProductos());
+            return "productos";
+        } else {
+            return "redirect:/home";
+        }
+
     }
 
     @GetMapping("/productos/new")

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import uniandes.edu.co.hotel_andes.modelo.Servicio;
+import uniandes.edu.co.hotel_andes.modelo.Usuario;
 import uniandes.edu.co.hotel_andes.repositorio.ServicioRepository;
 
 @Controller
@@ -18,9 +20,16 @@ public class ServiciosController {
     private ServicioRepository servicioRepository;
 
     @GetMapping("/servicios")
-    public String servicios(Model model) {
-        model.addAttribute("servicios", servicioRepository.darServicios());
-        return "servicios";
+    public String servicios(Model model, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("loggedInUser");
+        String tipo = user.getTiposUsuario_id().getTipo();
+        if (user != null && (tipo.equals("Administrador") || tipo.equals("Gerente"))) {
+            model.addAttribute("servicios", servicioRepository.darServicios());
+            return "servicios";
+        } else {
+            return "redirect:/home";
+        }
+
     }
 
     @GetMapping("/servicios/new")

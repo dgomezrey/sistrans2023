@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Inicio</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div><a th:href="@{/logout}" class="btn btn-danger">Logout</a></div>
+    <div class="menu">
+      <h1 class="text-center" th:text="${'Menu de ' + tipo}"></h1>
+      <ul>
+        <li th:if="${(tipo == 'Administrador') || (tipo == 'Gerente')}">
+          <a th:href="@{/tiposUsuario}" class="btn btn-primary"
+            >Tipos Usuario</a
+          >
+        </li>
+
+        <li th:if="${(tipo == 'Administrador') || (tipo == 'Gerente')}">
+          <a th:href="@{/usuarios}" class="btn btn-primary">Usuarios</a>
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/tiposHabitacion}" class="btn btn-primary"
+            >Tipos Habitacion</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/habitaciones}" class="btn btn-primary">Habitaciones</a>
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/servicios}" class="btn btn-primary">Servicios</a>
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/planesConsumo}" class="btn btn-primary"
+            >Planes Consumo</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'a' || (tipo == 'Gerente')}">
+          <a th:href="@{/reservasAlojamiento}" class="btn btn-primary"
+            >Reservas Alojamiento</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'a' || (tipo == 'Gerente')}">
+          <a th:href="@{/reservasServicio}" class="btn btn-primary"
+            >Reservas Servicio</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Empleado' || (tipo == 'Gerente')}">
+          <a th:href="@{/consumos}" class="btn btn-primary">Consumos</a>
+        </li>
+
+        <li
+          th:if="${tipo == 'Administrador' || (tipo == 'Gerente') || (tipo == 'Empleado')}"
+        >
+          <a th:href="@{/productos}" class="btn btn-primary">Productos</a>
+        </li>
+
+        <li th:if="${tipo == 'Recepcionista'}">
+          <a th:href="@{/checkin}" class="btn btn-primary">Realizar check in</a>
+        </li>
+
+        <li th:if="${tipo == 'Recepcionista'}">
+          <a th:href="@{/checkout}" class="btn btn-primary"
+            >Realizar check out</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
