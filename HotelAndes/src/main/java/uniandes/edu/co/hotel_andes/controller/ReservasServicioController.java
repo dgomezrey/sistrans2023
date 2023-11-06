@@ -37,10 +37,12 @@ public class ReservasServicioController {
         String tipo = user.getTiposUsuario_id().getTipo();
         if (user != null && tipo.equals("Gerente")) {
             model.addAttribute("reservasServicio", reservaServicioRepository.darReservasServicio());
-            return "reservasServicio";
+        } else if (user != null && tipo.equals("Cliente")) {
+            //model.addAttribute("reservasServicio", reservaServicioRepository.darReservasServicioUsuario(user.getId()));
         } else {
             return "redirect:/home";
         }
+        return "reservasServicio";
 
     }
 

@@ -37,10 +37,13 @@ public class ReservasAlojamientoController {
         String tipo = user.getTiposUsuario_id().getTipo();
         if (user != null && tipo.equals("Gerente")) {
             model.addAttribute("reservasAlojamiento", reservaAlojamientoRepository.darReservasAlojamiento());
-            return "reservasAlojamiento";
+        } else if (user != null && tipo.equals("Cliente")) {
+            model.addAttribute("reservasAlojamiento",
+                    reservaAlojamientoRepository.darReservasAlojamientoUsuario(user.getId()));
         } else {
             return "redirect:/home";
         }
+        return "reservasAlojamiento";
 
     }
 
