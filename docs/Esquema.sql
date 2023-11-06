@@ -121,10 +121,10 @@ ALTER TABLE tiposusuario ADD CONSTRAINT tiposusuario_pk PRIMARY KEY ( id );
 
 CREATE TABLE usuarios (
     id              NUMBER NOT NULL,
-    usuario         VARCHAR2(255 BYTE) NOT NULL,
+    usuario         VARCHAR2(255 BYTE) UNIQUE NOT NULL,
     contrasena      VARCHAR2(255 BYTE) NOT NULL,
     nombre          VARCHAR2(255 BYTE) NOT NULL,
-    email           VARCHAR2(255 BYTE) NOT NULL,
+    email           VARCHAR2(255 BYTE) UNIQUE NOT NULL,
     tipodocumento   VARCHAR2(255 BYTE) NOT NULL,
     documento       VARCHAR2(255 BYTE) NOT NULL,
     tiposusuario_id NUMBER NOT NULL
@@ -182,6 +182,50 @@ ALTER TABLE reservasservicio
 ALTER TABLE usuarios
     ADD CONSTRAINT usuarios_tiposusuario_fk FOREIGN KEY ( tiposusuario_id )
         REFERENCES tiposusuario ( id );
+        
+INSERT INTO TiposUsuario (id, tipo) VALUES ( tiposusuario_sequence.nextval , 'Cliente');
+INSERT INTO TiposUsuario (id, tipo) VALUES ( tiposusuario_sequence.nextval , 'Empleado');
+INSERT INTO TiposUsuario (id, tipo) VALUES ( tiposusuario_sequence.nextval , 'Recepcionista');
+INSERT INTO TiposUsuario (id, tipo) VALUES ( tiposusuario_sequence.nextval , 'Administrador');
+INSERT INTO TiposUsuario (id, tipo) VALUES ( tiposusuario_sequence.nextval , 'Gerente');
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'jreboll', '333', 'Juan Rebolledo', 'jrbol@gmail.com', 'CC', '123456789', 1);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'ahernandez', 'abeja', 'Alejandro Hernandez', 'alejoh@gmail.com', 'CC', '1234123123', 1);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'mcchaw', 'praga', 'Camila Chavez', 'camich24@outlook.com', 'CC', '987654321', 1);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'lcorredor', 'lcgm45', 'Laura Corredor', 'correlg@gmail.com', 'CC', '987987987', 1);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'empleado1', 'a', 'Empleado 1', 'e1@gmail.com', 'CC', '123', 2);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'empleado2', 'b', 'Empleado 2', 'e2@gmail.com', 'CC', '321', 2);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'empleado3', 'c', 'Empleado 3', 'e3@gmail.com', 'CC', '213', 2);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'empleado4', 'd', 'Empleado 4', 'e4@gmail.com', 'CC', '231', 2);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'recepcionista1', 'a', 'Recepcionista 1', 'r1@gmail.com', 'CC', '1234', 3);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'recepcionista2', 'b', 'Recepcionista 2', 'r2@gmail.com', 'CC', '4321', 3);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'a', 'a', 'Admin', 'admin@gmail.com', 'CC', '100', 4);
+
+INSERT INTO Usuarios (id, usuario, contrasena, nombre, email, tipoDocumento, documento, TiposUsuario_id) 
+VALUES ( usuarios_sequence.nextval , 'g', 'g', 'Gerente', 'gerente@gmail.com', 'CC', '101', 5);
+
+
         
 INSERT INTO PlanesConsumo (id, nombre, descripcion) VALUES ( planesconsumo_sequence.nextval , 'Estandar', 'Estandar');
 
