@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RFC4 Form</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <form action="/RFC4/mostrar" method="get">
+      <p>
+        Se pueden dejar vacíos, si es un rango hay que llenar ambos o ninguno
+      </p>
+      <div>
+        <label for="fecha1">Fecha 1 (YYYY-MM-DD):</label>
+        <input type="date" id="fecha1" name="fecha1" />
+      </div>
+      <div>
+        <label for="fecha2">Fecha 2 (YYYY-MM-DD):</label>
+        <input type="date" id="fecha2" name="fecha2" />
+      </div>
+
+      <div>
+        <label for="costo1">Costo Minimo:</label>
+        <input type="number" id="costo1" name="costo1" />
+      </div>
+      <div>
+        <label for="costo2">Costo Maximo:</label>
+        <input type="number" id="costo2" name="costo2" />
+      </div>
+      <div>
+        <label class="col-form-label">Tipo Servicio</label>
+        <select
+          class="form-control"
+          id="tipoServicio"
+          name="tipoServicio"
+          required
+        >
+          <option value="Bar">Bar</option>
+          <option value="Gimnasio">Gimnasio</option>
+          <option value="Internet">Internet</option>
+          <option value="Lavanderia">Lavanderia</option>
+          <option value="Piscina">Piscina</option>
+          <option value="Prestamo">Prestamo</option>
+          <option value="Restaurante">Restaurante</option>
+          <option value="SPA">SPA</option>
+          <option value="SalonConferencia">SalonConferencia</option>
+          <option value="SalonReunion">SalonReunion</option>
+          <option value="Supermercado">Supermercado</option>
+          <option value="Tienda">Tienda</option>
+        </select>
+      </div>
+      <label class="col-form-label" for="habitaciones_id">Habitacion:</label>
+      <select class="form-control" id="habitaciones_id" name="habitaciones_id">
+        <th:block th:each="habitacion : ${habitaciones}">
+          <option th:value="${habitacion.id}" th:text="${habitacion.numero}"></option>
+        </th:block></select
+      ><br />
+
+      <div>
+        <input type="submit" value="Guardar" />
+      </div>
+    </form>
+  </body>
+</html>

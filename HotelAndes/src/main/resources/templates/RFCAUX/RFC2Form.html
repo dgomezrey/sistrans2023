@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RFC2 Form</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <h1>Seleccione el rango de fechas</h1>
+    <form action="/RFC2/mostrar" method="get">
+      <div>
+        <label for="fecha1">Fecha 1:</label>
+        <input type="date" id="fecha1" name="fecha1" required />
+      </div>
+      <div>
+        <label for="fecha2">Fecha 2:</label>
+        <input type="date" id="fecha2" name="fecha2" required />
+      </div>
+      <div>
+        <input type="submit" value="Guardar" />
+      </div>
+    </form>
+  </body>
+</html>

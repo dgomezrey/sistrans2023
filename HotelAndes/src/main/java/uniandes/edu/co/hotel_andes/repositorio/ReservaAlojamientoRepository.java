@@ -25,7 +25,8 @@ public interface ReservaAlojamientoRepository extends JpaRepository<ReservaAloja
     @Query(value = "INSERT INTO ReservasAlojamiento (id, fechaIn, fechaOut, numPersonas, Usuarios_id, PlanesConsumo_id, Habitaciones_id) VALUES ( reservasalojamiento_sequence.nextval , :fechaIn, :fechaOut, :numPersonas, :Usuarios_id, :PlanesConsumo_id, :Habitaciones_id)", nativeQuery = true)
     void insertarReservaAlojamiento(@Param("fechaIn") Date fechaIn, @Param("fechaOut") Date fechaOut,
             @Param("numPersonas") Integer numPersonas, @Param("Usuarios_id") long Usuarios_id,
-            @Param("PlanesConsumo_id") long PlanesConsumo_id, @Param("Habitaciones_id") long Habitaciones_id);
+            @Param("PlanesConsumo_id") long PlanesConsumo_id,
+            @Param("Habitaciones_id") long Habitaciones_id);
 
     @Modifying
     @Transactional
@@ -46,5 +47,26 @@ public interface ReservaAlojamientoRepository extends JpaRepository<ReservaAloja
     @Query(value = "SELECT * FROM ReservasAlojamiento WHERE Habitaciones_id = :idHabitacion AND fechain >= TO_DATE(:fechaIn, 'YYYY-MM-DD') AND fechaOut <= TO_DATE(:fechaOut, 'YYYY-MM-DD')", nativeQuery = true)
     Collection<ReservaAlojamiento> darReservasAlojamientoHabitacion(@Param("idHabitacion") long idHabitacion,
             @Param("fechaIn") String fechaIn, @Param("fechaOut") String fechaOut);
+
+    @Query(value = "SELECT fechain as Fecha, COUNT(*) AS ocupacion " + //
+            "FROM reservasalojamiento " + //
+            "GROUP BY fechain " + //
+            "ORDER BY ocupacion DESC " + //
+            "FETCH FIRST 10 ROWS ONLY", nativeQuery = true)
+    Collection<Object[]> darRFC6A();
+
+    @Query(value = "SELECT c.fecha, SUM(c.total) AS ingresos " + //
+            "FROM consumos c " + //
+            "GROUP BY c.fecha " + //
+            "ORDER BY ingresos DESC " + //
+            "FETCH FIRST 10 ROWS ONLY", nativeQuery = true)
+    Collection<Object[]> darRFC6B();
+
+    @Query(value = "SELECT fechain, COUNT(*) AS ocupacion " + //
+            "FROM reservasalojamiento " + //
+            "GROUP BY fechain " + //
+            "ORDER BY ocupacion ASC " + //
+            "FETCH FIRST 10 ROWS ONLY", nativeQuery = true)
+    Collection<Object[]> darRFC6C();
 
 }
