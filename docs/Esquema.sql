@@ -231,4 +231,10 @@ INSERT INTO PlanesConsumo (id, nombre, descripcion) VALUES ( planesconsumo_seque
 
 INSERT INTO Productos (id, nombre, precio) VALUES ( productos_sequence.nextval , 'Sin Producto', 0);
 
+CREATE INDEX idx_reservasalojamiento_fechain ON ReservasAlojamiento (fechain);
+CREATE INDEX idx_reservasservicio_fecha ON Reservasservicio (fecha);
+CREATE INDEX idx_consumos_fecha ON consumos (fecha);
+CREATE INDEX idx_reservasalojamiento_habitaciones_id ON reservasalojamiento (habitaciones_id);
+CREATE INDEX idx_reservasservicio_servicios_id ON reservasservicio (servicios_id);
+
 COMMIT;
