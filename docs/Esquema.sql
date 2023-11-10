@@ -237,4 +237,25 @@ CREATE INDEX idx_consumos_fecha ON consumos (fecha);
 CREATE INDEX idx_reservasalojamiento_habitaciones_id ON reservasalojamiento (habitaciones_id);
 CREATE INDEX idx_reservasservicio_servicios_id ON reservasservicio (servicios_id);
 
+
+CREATE INDEX in_habitaciones_id ON reservasservicios (habitaciones_id);
+Drop index in_habitaciones_id;
+
+CREATE INDEX in_ocupacion_id ON reservasalojamiento (habitacion_id);
+Drop index in_ ocupacion _id;
+CREATE INDEX in_fechas_id ON reservasalojamiento (fechain);
+Drop index in_fechas_id;
+
+CREATE INDEX in_serviciosi_id ON reservasservicio (servicio_id);
+Drop index in_ serviciosi _id;
+
+CREATE INDEX in_usuariod_id ON usuarios (id);
+Drop index in_ usuariod _id;
+CREATE INDEX in_fechasu_id ON consumos (fecha);
+Drop index in_ fechasu_id;
+
+CREATE INDEX in_fechasr_id ON reservasalojamiento (fechain);
+Drop index in_ fechasr_id;
+CREATE INDEX in_ocupacion_id ON reservasalojamiento (habitacion_id);
+Drop index in_ ocupacion _id;
 COMMIT;
