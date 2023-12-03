@@ -1,51 +1,70 @@
 package com.example.mdbspringboot.Modelo;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("tiposHabitaciones")
+@Document("tipos_habitacion")
 public class TipoHabitacion {
     
     @Id
     private String id;
 
-    List<ElementoHabitacion> elementosHabitaciones;
+    private String tipo;
 
-    String nombre;
-    int capacidad;
-    public TipoHabitacion(String id, List<ElementoHabitacion> elementosHabitaciones, String nombre, int capacidad) {
+    private int capacidad;
+
+    private int camas;
+
+    private double costo_noche;
+
+    public TipoHabitacion() {;}
+
+    public TipoHabitacion(String id, String tipo, int capacidad, int camas, double costo_noche) {
         this.id = id;
-        this.elementosHabitaciones = elementosHabitaciones;
-        this.nombre = nombre;
+        this.tipo = tipo;
         this.capacidad = capacidad;
+        this.camas = camas;
+        this.costo_noche = costo_noche;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    public List<ElementoHabitacion> getElementosHabitaciones() {
-        return elementosHabitaciones;
+
+    public String getTipo() {
+        return tipo;
     }
-    public void setElementosHabitaciones(List<ElementoHabitacion> elementosHabitaciones) {
-        this.elementosHabitaciones = elementosHabitaciones;
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+
     public int getCapacidad() {
         return capacidad;
     }
+
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
 
+    public int getCamas() {
+        return camas;
+    }
 
+    public void setCamas(int camas) {
+        this.camas = camas;
+    }
+
+    public double getCosto_noche() {
+        return costo_noche;
+    }
+
+    public void setCosto_noche(double costo_noche) {
+        this.costo_noche = costo_noche;
+    }
     
 }

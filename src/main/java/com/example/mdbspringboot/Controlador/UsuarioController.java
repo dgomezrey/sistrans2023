@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.mdbspringboot.Modelo.Usuario;
+import com.example.mdbspringboot.Modelo.Cliente;
 import com.example.mdbspringboot.Repositorio.ServicioRepository;
-import com.example.mdbspringboot.Repositorio.UsuarioRepository;
-import com.example.mdbspringboot.Repositorio.UsuarioRepository.respuestaRFC3;
+import com.example.mdbspringboot.Repositorio.ClienteRepository;
+import com.example.mdbspringboot.Repositorio.ClienteRepository.respuestaRFC3;
 @Controller
 public class UsuarioController {
     
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private ClienteRepository usuarioRepository;
 
     @Autowired
     ServicioRepository servicioRepository;
@@ -27,7 +27,7 @@ public class UsuarioController {
 
     @PostMapping("/login")
     private String hola(Model model, @RequestParam("nombreusuario") String nombreusuario, @RequestParam("contrasena") String constrasena){
-        Usuario usuario = usuarioRepository.findCredentials(nombreusuario,constrasena);
+        Cliente usuario = usuarioRepository.findCredentials(nombreusuario,constrasena);
         if(usuario == null){
              return "/index.html";
         }

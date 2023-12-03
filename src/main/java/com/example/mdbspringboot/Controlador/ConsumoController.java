@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.mdbspringboot.Modelo.Consumo;
 import com.example.mdbspringboot.Modelo.Habitacion;
-import com.example.mdbspringboot.Modelo.ReservaHabitacion;
+import com.example.mdbspringboot.Modelo.Reserva;
 import com.example.mdbspringboot.Modelo.Servicio;
-import com.example.mdbspringboot.Modelo.Usuario;
+import com.example.mdbspringboot.Modelo.Cliente;
 import com.example.mdbspringboot.Repositorio.ConsumoRepository;
 import com.example.mdbspringboot.Repositorio.HabitacionRepository;
-import com.example.mdbspringboot.Repositorio.ReservaHabitacionRepository;
+import com.example.mdbspringboot.Repositorio.ReservaRepository;
 import com.example.mdbspringboot.Repositorio.ServicioRepository;
-import com.example.mdbspringboot.Repositorio.UsuarioRepository;
+import com.example.mdbspringboot.Repositorio.ClienteRepository;
 
 
 @Controller
@@ -32,10 +32,10 @@ public class ConsumoController {
     ServicioRepository servicioRepository;
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    ClienteRepository usuarioRepository;
 
     @Autowired
-    ReservaHabitacionRepository reservaHabitacionRepository;
+    ReservaRepository reservaHabitacionRepository;
 
     @Autowired
     HabitacionRepository habitacionRepository;
@@ -65,9 +65,9 @@ public class ConsumoController {
     @RequestParam("fechaConsumo")  String fechaConsumo,@RequestParam("numConsumos")  String numConsumos,
     @RequestParam("servicio")  String servicio, @RequestParam("idUsuario") String idUsuario, @RequestParam("descripcion") String descripcion){
 
-        List<ReservaHabitacion> reservas = reservaHabitacionRepository.findUsuariosId(idUsuario);
+        List<Reserva> reservas = reservaHabitacionRepository.findUsuariosId(idUsuario);
         for(int i = 0; i < reservas.size();i++){
-            ReservaHabitacion reserva = reservas.get(i);
+            Reserva reserva = reservas.get(i);
             reserva.setPlanConsumo(reserva.getFechaInicio() + " " + reserva.getFechaFin());
         }
 
@@ -88,7 +88,7 @@ public class ConsumoController {
     @RequestParam("servicio")  String servicio, @RequestParam("idUsuario") String idUsuario, @RequestParam("reservaHabitacion") String reservaHabitacion,@RequestParam("descripcion") String descripcion){
 
         Consumo consumo = consumoRepository.insert(new Consumo(null, sumaTotal, fechaConsumo, numConsumos, descripcion,servicio, reservaHabitacion, idUsuario));
-        Usuario usuario = usuarioRepository.findById(idUsuario).get();
+        Cliente usuario = usuarioRepository.findById(idUsuario).get();
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(consumo.getReservaHabitacion());
         Servicio servicio_ = servicioRepository.findById(consumo.getServicio()).get();
         usuario.getConsumos().add(consumo);
@@ -108,7 +108,7 @@ public class ConsumoController {
     @GetMapping("/RF6/{id}/delete")
     String eliminar(@PathVariable("id") String id){
         Consumo consumo = consumoRepository.findById(id).get();
-        Usuario usuario = usuarioRepository.findConsumosId(id);
+        Cliente usuario = usuarioRepository.findConsumosId(id);
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(consumo.getReservaHabitacion());
         Servicio servicio = servicioRepository.findById(consumo.getServicio()).get();
         for(int i = 0; i < usuario.getConsumos().size();i++){
@@ -153,9 +153,9 @@ public class ConsumoController {
     @RequestParam("fechaConsumo")  String fechaConsumo,@RequestParam("numConsumos")  String numConsumos,
     @RequestParam("servicio")  String servicio, @RequestParam("idUsuario") String idUsuario,@RequestParam("descripcion") String descripcion  ){
 
-        List<ReservaHabitacion> reservas = reservaHabitacionRepository.findUsuariosId(idUsuario);
+        List<Reserva> reservas = reservaHabitacionRepository.findUsuariosId(idUsuario);
         for(int i = 0; i < reservas.size();i++){
-            ReservaHabitacion reserva = reservas.get(i);
+            Reserva reserva = reservas.get(i);
             reserva.setPlanConsumo(reserva.getFechaInicio() + " " + reserva.getFechaFin());
         }
 
@@ -186,10 +186,10 @@ public class ConsumoController {
         consumo.setSumaTotal(sumaTotal);
         consumo.setUsuario(idUsuario);
 
-        Usuario usuario_ = usuarioRepository.findConsumosId(id);
+        Cliente usuario_ = usuarioRepository.findConsumosId(id);
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(consumo.getReservaHabitacion());
 
-        Usuario usuarioService = usuario_;
+        Cliente usuarioService = usuario_;
 
         if(usuario_.getId().equals(idUsuario)){
             for(int i = 0; i < usuario_.getConsumos().size();i++){
@@ -207,7 +207,7 @@ public class ConsumoController {
                     break;
                 }
             }
-            Usuario usuario = usuarioRepository.findById(idUsuario).get();
+            Cliente usuario = usuarioRepository.findById(idUsuario).get();
             usuario.getConsumos().add(consumo);
             usuarioRepository.save(usuario);
 

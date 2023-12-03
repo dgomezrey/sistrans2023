@@ -11,58 +11,51 @@ public class Habitacion {
     @Id
     private String id;
 
-    int numero;
-    int costoAlojamiento;
+    private int numero;
+    
+    private int piso;
 
-    String tipoHabitacion;
-    List<ReservaHabitacion> reservasHabitaciones;
-    List<Consumo> consumos;
-    public Habitacion(String id, int numero, int costoAlojamiento, String tipoHabitacion,
-            List<ReservaHabitacion> reservasHabitaciones, List<Consumo> consumos) {
+    private String tipo_habitacion_id;
+
+    public Habitacion() {;}
+
+    public Habitacion(String id, int numero, int piso, String tipo_habitacion_id) {
         this.id = id;
         this.numero = numero;
-        this.costoAlojamiento = costoAlojamiento;
-        this.tipoHabitacion = tipoHabitacion;
-        this.reservasHabitaciones = reservasHabitaciones;
-        this.consumos = consumos;
+        this.piso = piso;
+        this.tipo_habitacion_id = tipo_habitacion_id;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public int getNumero() {
         return numero;
     }
+
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    public int getCostoAlojamiento() {
-        return costoAlojamiento;
-    }
-    public void setCostoAlojamiento(int costoAlojamiento) {
-        this.costoAlojamiento = costoAlojamiento;
-    }
-    public String getTipoHabitacion() {
-        return tipoHabitacion;
-    }
-    public void setTipoHabitacion(String tipoHabitacion) {
-        this.tipoHabitacion = tipoHabitacion;
-    }
-    public List<ReservaHabitacion> getReservasHabitaciones() {
-        return reservasHabitaciones;
-    }
-    public void setReservasHabitaciones(List<ReservaHabitacion> reservasHabitaciones) {
-        this.reservasHabitaciones = reservasHabitaciones;
-    }
-    public List<Consumo> getConsumos() {
-        return consumos;
-    }
-    public void setConsumos(List<Consumo> consumos) {
-        this.consumos = consumos;
+
+    public int getPiso() {
+        return piso;
     }
 
-    
+    public void setPiso(int piso) {
+        this.piso = piso;
+    }
+
+    public String getTipo_habitacion_id() {
+        return tipo_habitacion_id;
+    }
+
+    public void setTipo_habitacion_id(String tipo_habitacion_id) {
+        this.tipo_habitacion_id = tipo_habitacion_id;
+    }
     
 }

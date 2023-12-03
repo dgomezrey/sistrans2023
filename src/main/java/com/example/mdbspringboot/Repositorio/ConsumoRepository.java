@@ -10,12 +10,11 @@ import com.example.mdbspringboot.Modelo.Consumo;
 
 public interface ConsumoRepository extends MongoRepository<Consumo,String>{
 
-    @Query("{'usuario._id': {$in: ?0}}")
-    List<Consumo> findByUsuarios(List<String> usuarios);
+    @Query("{'reserva_id': ?0}")
+    List<Consumo> findByReservaId(String reservaId);
 
-    @Query("{'reservaHabitacion':?0}")
-    List<Consumo> findByIdreserva(String id);
+    @Query("{'servicio_id': ?0}")
+    List<Consumo> findByServicioId(String servicioId);
 
-    @Query("{'servicio':?0}")
-    List<Consumo> findByIdServicio(String id);
+    //Faltan RFCs
 }

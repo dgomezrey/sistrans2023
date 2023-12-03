@@ -16,27 +16,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.mdbspringboot.Modelo.Consumo;
 import com.example.mdbspringboot.Modelo.Habitacion;
-import com.example.mdbspringboot.Modelo.ReservaHabitacion;
+import com.example.mdbspringboot.Modelo.Reserva;
 import com.example.mdbspringboot.Modelo.TipoUsuario;
-import com.example.mdbspringboot.Modelo.Usuario;
+import com.example.mdbspringboot.Modelo.Cliente;
 import com.example.mdbspringboot.Repositorio.ConsumoRepository;
 import com.example.mdbspringboot.Repositorio.HabitacionRepository;
 import com.example.mdbspringboot.Repositorio.PlanConsumoRepository;
-import com.example.mdbspringboot.Repositorio.ReservaHabitacionRepository;
+import com.example.mdbspringboot.Repositorio.ReservaRepository;
 import com.example.mdbspringboot.Repositorio.TipoHabitacionRepository;
-import com.example.mdbspringboot.Repositorio.UsuarioRepository;
+import com.example.mdbspringboot.Repositorio.ClienteRepository;
 
 @Controller
 public class ReservaHabitacionController {
     
     @Autowired
-    ReservaHabitacionRepository reservaHabitacionRepository;
+    ReservaRepository reservaHabitacionRepository;
 
     @Autowired
     PlanConsumoRepository planConsumoRepository;
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    ClienteRepository usuarioRepository;
 
     @Autowired
     HabitacionRepository habitacionRepository;
@@ -51,8 +51,8 @@ public class ReservaHabitacionController {
     @GetMapping("/RF4")
     String mostrar(Model model, @RequestParam("id") String id){
         model.addAttribute("id", id);
-        List<ReservaHabitacion> reservas = reservaHabitacionRepository.findUsuariosId(id);
-        for(ReservaHabitacion res: reservas){
+        List<Reserva> reservas = reservaHabitacionRepository.findUsuariosId(id);
+        for(Reserva res: reservas){
             Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(res.getId());
             res.setPlanConsumo(Integer.toString(habitacion.getNumero()));
         }
@@ -79,7 +79,7 @@ public class ReservaHabitacionController {
         Date inicio = formato.parse(fechaInicio);
         Date fin = formato.parse(fechaFin);
 
-        for(ReservaHabitacion res: habitacion_.getReservasHabitaciones()){
+        for(Reserva res: habitacion_.getReservasHabitaciones()){
             Date inicio1 = formato.parse(res.getFechaInicio());
             Date fin1 = formato.parse(res.getFechaFin());
 
@@ -101,9 +101,9 @@ public class ReservaHabitacionController {
         if(planConsumo.equals("--")){
             planConsumo = null;
         }
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Cliente> usuarios = new ArrayList<>();
         usuarios.add(usuarioRepository.findById(id).get());
-        ReservaHabitacion reservaHabitacion = new ReservaHabitacion(null, planConsumo, usuarios, null, null, numPersonas, fechaInicio, fechaFin);
+        Reserva reservaHabitacion = new Reserva(null, planConsumo, usuarios, null, null, numPersonas, fechaInicio, fechaFin);
             
         habitacion_.getReservasHabitaciones().add(reservaHabitacion);
         model.addAttribute("id", id);
@@ -129,7 +129,7 @@ public class ReservaHabitacionController {
     @RequestParam("numPersonas") int numPersonas ,@RequestParam("planConsumo") String  planConsumo,@RequestParam("habitacion") String habitacion,
     @RequestParam("idUsuario") String idUsuario){
 
-        ReservaHabitacion reservaHabitacion = reservaHabitacionRepository.findById(id).get();
+        Reserva reservaHabitacion = reservaHabitacionRepository.findById(id).get();
         reservaHabitacion.setFechaFin(fechaFin);
         reservaHabitacion.setFechaInicio(fechaInicio);
         reservaHabitacion.setNumPersonas(numPersonas);
@@ -138,7 +138,7 @@ public class ReservaHabitacionController {
         Habitacion habitacion_ = habitacionRepository.findById(idHab).get();
 
         if(idHab.equals(habitacion)){
-            List<ReservaHabitacion> reservas = habitacion_.getReservasHabitaciones();
+            List<Reserva> reservas = habitacion_.getReservasHabitaciones();
             for(int i = 0; i< reservas.size();i++){
                 if(reservas.get(i).getId().equals(id)){
                     reservas.set(i, reservaHabitacion);
@@ -148,7 +148,7 @@ public class ReservaHabitacionController {
             }
         }
         else{
-            List<ReservaHabitacion> reservas = habitacion_.getReservasHabitaciones();
+            List<Reserva> reservas = habitacion_.getReservasHabitaciones();
             for(int i = 0; i< reservas.size();i++){
                 if(reservas.get(i).getId().equals(id)){
                     reservas.remove(i);
@@ -177,7 +177,7 @@ public class ReservaHabitacionController {
         }
 
         Habitacion habitacion = habitacionRepository.findByNumero(idHab);
-        List<ReservaHabitacion> reservaHabitaciones = habitacion.getReservasHabitaciones();
+        List<Reserva> reservaHabitaciones = habitacion.getReservasHabitaciones();
         for(int i = 0; i< reservaHabitaciones.size(); i++){
             if(reservaHabitaciones.get(i).getId().equals(id)){
                 reservaHabitaciones.remove(i);
@@ -209,10 +209,10 @@ public class ReservaHabitacionController {
     @GetMapping("/RF5/{id}/fecha")
     String fecha(Model model, @PathVariable("id") String id, @RequestParam("fechaCheckIn") String fechaCheckIn){
 
-        ReservaHabitacion reservaHabitacion = reservaHabitacionRepository.findById(id).get();
+        Reserva reservaHabitacion = reservaHabitacionRepository.findById(id).get();
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(id);
 
-        for(ReservaHabitacion res: habitacion.getReservasHabitaciones()){
+        for(Reserva res: habitacion.getReservasHabitaciones()){
             if(res.getId().equals(id)){
                 res.setFechaCheckIn(fechaCheckIn);
                 break;
@@ -242,15 +242,15 @@ public class ReservaHabitacionController {
     @RequestParam("correoElectronico") String correoElectronico, @RequestParam("nombreUsuario") String nombreUsuario, @RequestParam("contrasena") String contrasena,
     @RequestParam("usuario") String usuario){
 
-        ReservaHabitacion reservaHabitacion = reservaHabitacionRepository.findById(id).get();
+        Reserva reservaHabitacion = reservaHabitacionRepository.findById(id).get();
 
         if(!usuario.equals("--")){
-            Usuario usuario_ = usuarioRepository.findById(usuario).get();
+            Cliente usuario_ = usuarioRepository.findById(usuario).get();
             reservaHabitacion.getUsuarios().add(usuario_);
             reservaHabitacionRepository.save(reservaHabitacion);
         }
         else{
-            Usuario usuario_ = new Usuario(null, nombre, new TipoUsuario("Cliente", "D"), tipoDocumento, numeroDocumento, correoElectronico, nombreUsuario, contrasena, new ArrayList<>(),null);
+            Cliente usuario_ = new Cliente(null, nombre, new TipoUsuario("Cliente", "D"), tipoDocumento, numeroDocumento, correoElectronico, nombreUsuario, contrasena, new ArrayList<>(),null);
             usuarioRepository.insert(usuario_);
             reservaHabitacion.getUsuarios().add(usuario_);
             reservaHabitacionRepository.save(reservaHabitacion);
@@ -284,7 +284,7 @@ public class ReservaHabitacionController {
     String borrar(@PathVariable("id") String id){
 
         
-        ReservaHabitacion reservaHabitacion = reservaHabitacionRepository.findById(id).get();
+        Reserva reservaHabitacion = reservaHabitacionRepository.findById(id).get();
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(id);
         reservaHabitacion.setFechaCheckIn(null);
         reservaHabitacion.setUsuarios(reservaHabitacion.getUsuarios().subList(0, 1));
@@ -316,7 +316,7 @@ public class ReservaHabitacionController {
 
     @PostMapping("RF7/{id}/checkOut")
     String checkout(Model model, @PathVariable("id") String id, @RequestParam("fechaCheckOut") String fechaCheckOut) throws ParseException{
-        ReservaHabitacion reservaHabitacion = reservaHabitacionRepository.findById(id).get();
+        Reserva reservaHabitacion = reservaHabitacionRepository.findById(id).get();
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(id);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -327,7 +327,7 @@ public class ReservaHabitacionController {
 
         long dinero = dias * habitacion.getCostoAlojamiento();
         List<String> usuarios = new ArrayList<>();
-        for(Usuario usuario: reservaHabitacion.getUsuarios()){
+        for(Cliente usuario: reservaHabitacion.getUsuarios()){
             usuarios.add(usuario.getId());
         }
         List<Consumo> consumos = consumoRepository.findByUsuarios(usuarios);
@@ -354,7 +354,7 @@ public class ReservaHabitacionController {
     @GetMapping("RF7/{id}/confirmado")
     String con(Model model, @PathVariable("id") String id, @RequestParam("fechaCheckOut") String fechaCheckOut){
 
-        ReservaHabitacion reservaHabitacion = reservaHabitacionRepository.findById(id).get();
+        Reserva reservaHabitacion = reservaHabitacionRepository.findById(id).get();
         reservaHabitacion.setFechaCheckOut(fechaCheckOut);
 
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(id);
@@ -373,7 +373,7 @@ public class ReservaHabitacionController {
 
     @GetMapping("RF7/{id}/delete")
     String delete(@PathVariable("id") String id){
-        ReservaHabitacion reservaHabitacion = reservaHabitacionRepository.findById(id).get();
+        Reserva reservaHabitacion = reservaHabitacionRepository.findById(id).get();
         Habitacion habitacion = habitacionRepository.findByReservasHabitacionesId(id);
 
         reservaHabitacion.setFechaCheckOut(null);

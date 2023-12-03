@@ -1,111 +1,213 @@
-db.createCollection('tiposHabitaciones',{
-    validator: {
-        $jsonSchema:{
-            bsonType:'object',
-            required: ['nombre','capacidad','elementosHabitaciones'],
-            properties:{
-                'nombre':{bsonType:'string'},
-                'capacidad':{bsonType:'int'},
-                'elementosHabitaciones':{bsonType:'array',
-                                        items:{bsonType:'object',required:['nombre']
-}}}}}})
-
-db.createCollection('usuarios',{
-    validator: {
-        $jsonSchema:{
-            bsonType:'object',
-            required: ['nombre','tipoDocumento','numeroDocumento','correoElectronico','nombreUsuario','contrasena','tipoUsuario','consumos'],
-            properties:{
-                'nombre': {bsonType:'string'},
-                'tipoDocumento':{bsonType:'string'},
-                'numeroDocumento':{bsonType:'int'},
-                'correoElectronico':{bsonType:'string'},
-                'nombreUsuario':{bsonType:'string'},
-                'contrasena':{bsonType:'string'},
-                'tipoUsuario':{bsonType:'object'},
-                'consumos':{bsonType:'array',items:{bsonType:'object'}}
-            }}}})
-
-db.createCollection('consumos',{
-    validator: {
-        $jsonSchema:{
-            bsonType:'object',
-            required: ['sumaTotal','fechaConsumo','numConsumos','descripcion','servicio','reservaHabitacion','usuario'],
-            properties:{
-                'sumaTotal':{bsonType:'int'},
-                'fechaConsumo':{bsonType:'string'},
-                'numConsumos':{bsonType:'int'},
-                'descripcion':{bsonType:'string'},
-                'servicio':{bsonType:'string'},
-                'reservaHabitacion':{bsonType:'string'},
-                'usuario':{bsonType:'string'}
-            }
+db.createCollection("clientes", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [
+        "usuario",
+        "contrasena",
+        "nombre",
+        "email",
+        "tipo_documento",
+        "documento"
+      ],
+      properties: {
+        usuario: {
+          bsonType: "string"
+        },
+        contraseña: {
+          bsonType: "string"
+        },
+        nombre: {
+          bsonType: "string"
+        },
+        email: {
+          bsonType: "string",
+          pattern: "^.+@.+..+$"
+        },
+        tipo_documento: {
+          bsonType: "string"
+        },
+        documento: {
+          bsonType: "string"
         }
+      }
     }
-})
-db.createCollection('habitaciones',{
-    validator:{
-        $jsonSchema : {
-            bsonType : 'object',
-            required : ['numero','costoAlojamiento','tipoHabitacion','reservasHabitaciones','consumos'],
-            properties : {
-                'numero' : {bsonType : 'int'},
-                'costoAlojamiento' : {bsonType : 'int'},
-                'tipoHabitacion' : {bsonType : 'string'},
-                'reservasHabitaciones' : {bsonType:'array',items:{bsonType:'object'}},
-                'consumos' : {bsonType:'array',items:{bsonType:'object'}}
-            }
-        }
-    }
+  }
 })
 
-db.createCollection('reservasHabitaciones',{
-    validator: {
-        $jsonSchema : {
-            bsonType : 'object',
-            required : ['usuarios','numPersonas','fechaInicio','fechaFin'],
-            properties : {
-                'fechaCheckIn' : {bsonType : 'string'},
-                'fechaCheckOut' : {bsonType : 'string'},
-                'numPersonas' : {bsonType : 'int'},
-                'fechaInicio' : {bsonType : 'string'},
-                'fechaFin' : {bsonType : 'string'},
-                'usuarios' :  {bsonType:'array',items:{bsonType:'object'}}
-            }
+db.createCollection("tipos_habitacion", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["tipo", "capacidad", "camas", "costo_noche"],
+      properties: {
+        tipo: {
+          bsonType: "string"
+        },
+        capacidad: {
+          bsonType: "int",
+          minimum: 1
+        },
+        camas: {
+          bsonType: "int",
+          minimum: 1
+        },
+        costo_noche: {
+          bsonType: "double",
+          minimum: 0
         }
+      }
     }
+  }
 })
 
-db.createCollection('servicios',{
-    validator : {
-        $jsonSchema : {
-            bsonType : 'object',
-            required : ['nombre','descripcion','costoPorUnidad','unidad','horario','tipoServicio','capacidad','productos', 'usuarios'],
-            properties : {
-                'nombre' : {bsonType : 'string'},
-                'descripcion' : {bsonType : 'string'},
-                'costoPorUnidad' : {bsonType : 'int'},
-                'unidad' : {bsonType : 'int'},
-                'horario' : {bsonType : 'string'},
-                'tipoServicio' : {bsonType : 'string'},
-                'capacidad' : {bsonType : 'int'},
-                'productos' : {bsonType:'array',items:{bsonType:'object'}},
-                'usuarios' : {bsonType:'array',items:{bsonType:'object'}}
-            }
+db.createCollection("habitaciones", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["numero", "piso", "tipo_habitacion_id"],
+      properties: {
+        numero: {
+          bsonType: "int",
+          minimum: 1
+        },
+        piso: {
+          bsonType: "int",
+          minimum: 1
+        },
+        tipo_habitacion_id: {
+          bsonType: "objectId"
         }
+      }
     }
+  }
 })
 
-db.createCollection('planesConsumo',{
-    validator: {
-        $jsonSchema : {
-            bsonType : 'object',
-            required : ['descripcion','descuento','nombre'],
-            properties : {
-                'descripcion' : {bsonType : 'string'},
-                'descuento' : {bsonType : 'double'},
-                'nombre' : {bsonType : 'string'}
-            }
+db.createCollection("reservas", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [
+        "fecha_inicio",
+        "fecha_fin",
+        "fecha_checkin",
+        "fecha_checkout",
+        "num_personas",
+        "cliente_id",
+        "habitacion_id"
+      ],
+      properties: {
+        fecha_inicio: {
+          bsonType: "date"
+        },
+        fecha_fin: {
+          bsonType: "date"
+        },
+        fecha_checkin: {
+          bsonType: "date"
+        },
+        fecha_checkout: {
+          bsonType: "date"
+        },
+        num_personas: {
+          bsonType: "int",
+          minimum: 1
+        },
+        cliente_id: {
+          bsonType: "objectId"
+        },
+        habitacion_id: {
+          bsonType: "objectId"
         }
+      }
     }
+  }
+})
+
+db.createCollection("servicios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["nombre", "descripcion", "tipo_servicio"],
+      properties: {
+        nombre: {
+          bsonType: "string"
+        },
+        descripcion: {
+          bsonType: "string"
+        },
+        tipo_servicio: {
+          bsonType: "string",
+          enum: [
+            "SPA",
+            "Prestamo",
+            "Piscina",
+            "Gimnasio",
+            "Internet",
+            "Lavanderia",
+            "Restaurante",
+            "Bar",
+            "Tienda",
+            "Supermercado",
+            "SalonReunion",
+            "SalonConferencia"
+          ]
+        },
+        costo_unidad: {
+          bsonType: "double"
+        },
+        horario: {
+          bsonType: "string",
+          enum: ["Manana", "Tarde", "Noche"]
+        },
+        capacidad: {
+          bsonType: "int",
+        },
+        productos: {
+          bsonType: "array",
+          items: {
+            bsonType: "object",
+            required: ["nombre", "precio"],
+            properties: {
+              nombre: {
+                bsonType: "string"
+              },
+              precio: {
+                bsonType: "double",
+                minimum: 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+})
+
+db.createCollection("consumos", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["cantidad", "fecha", "total", "servicio_id", "reserva_id"],
+      properties: {
+        cantidad: {
+          bsonType: "int",
+          minimum: 1
+        },
+        fecha: {
+          bsonType: "date"
+        },
+        total: {
+          bsonType: "double",
+          minimum: 0
+        },
+        servicio_id: {
+          bsonType: "objectId"
+        },
+        reserva_id: {
+          bsonType: "objectId"
+        }
+      }
+    }
+  }
 })

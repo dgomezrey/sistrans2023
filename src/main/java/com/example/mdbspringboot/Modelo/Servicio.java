@@ -9,32 +9,40 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Servicio {
     
     @Id
-    String id;
+    private String id;
 
-    String nombre;
-    String descripcion;
-    int costoPorUnidad;
-    int unidad;
-    String horario;
-    String tipoServicio;
-    int capacidad;
+    private String nombre;
+
+    private String descripcion;
+
+    private String tipo_servicio;
+
+    private double costo_unidad;
+
+    private String horario;
+
+    private int capacidad;
 
     List<Producto> productos;
 
-    List<Usuario> usuarios;
+    public Servicio() {;}
 
-    public Servicio(String id, String nombre, String descripcion, int costoPorUnidad, int unidad, String horario,
-            String tipoServicio, int capacidad, List<Producto> productos, List<Usuario> usuarios) {
-        this.id = id;
+    public Servicio(String nombre, String descripcion, String tipo_servicio, List<Producto> productos) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.costoPorUnidad = costoPorUnidad;
-        this.unidad = unidad;
+        this.tipo_servicio = tipo_servicio;
+        this.productos = productos;
+    }
+
+    public Servicio(String nombre, String descripcion, String tipo_servicio, double costo_unidad, String horario,
+            int capacidad, List<Producto> productos) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo_servicio = tipo_servicio;
+        this.costo_unidad = costo_unidad;
         this.horario = horario;
-        this.tipoServicio = tipoServicio;
         this.capacidad = capacidad;
         this.productos = productos;
-        this.usuarios = usuarios;
     }
 
     public String getId() {
@@ -61,20 +69,20 @@ public class Servicio {
         this.descripcion = descripcion;
     }
 
-    public int getCostoPorUnidad() {
-        return costoPorUnidad;
+    public String getTipo_servicio() {
+        return tipo_servicio;
     }
 
-    public void setCostoPorUnidad(int costoPorUnidad) {
-        this.costoPorUnidad = costoPorUnidad;
+    public void setTipo_servicio(String tipo_servicio) {
+        this.tipo_servicio = tipo_servicio;
     }
 
-    public int getUnidad() {
-        return unidad;
+    public double getCosto_unidad() {
+        return costo_unidad;
     }
 
-    public void setUnidad(int unidad) {
-        this.unidad = unidad;
+    public void setCosto_unidad(double costo_unidad) {
+        this.costo_unidad = costo_unidad;
     }
 
     public String getHorario() {
@@ -83,14 +91,6 @@ public class Servicio {
 
     public void setHorario(String horario) {
         this.horario = horario;
-    }
-
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
     }
 
     public int getCapacidad() {
@@ -109,13 +109,37 @@ public class Servicio {
         this.productos = productos;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
+    //CLase Producto embebida
+    public static class Producto {
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
+        private String nombre;
 
+        private double precio;
+
+        public Producto() {;}
+
+        public Producto(String nombre, double precio) {
+            this.nombre = nombre;
+            this.precio = precio;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public double getPrecio() {
+            return precio;
+        }
+
+        public void setPrecio(double precio) {
+            this.precio = precio;
+        }
+
+        
+    }
     
 }

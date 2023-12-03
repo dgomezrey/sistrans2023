@@ -1,5 +1,7 @@
 package com.example.mdbspringboot.Modelo;
 
+import java.sql.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,76 +11,73 @@ public class Consumo {
     @Id
     private String id;
 
-    int sumaTotal;
-    String fechaConsumo;
-    int numConsumos;
-    String descripcion;
+    private int cantidad;
 
-    String servicio;
-    String reservaHabitacion;
-    String usuario;
-    public Consumo(String id, int sumaTotal, String fechaConsumo, int numConsumos, String descripcion, String servicio,
-            String reservaHabitacion, String usuario) {
+    private Date fecha;
+
+    private double total;
+
+    private String servicio_id;
+
+    private String reserva_id;
+
+    public Consumo() {;}
+
+    public Consumo(String id, int cantidad, Date fecha, double total, String servicio_id, String reserva_id) {
         this.id = id;
-        this.sumaTotal = sumaTotal;
-        this.fechaConsumo = fechaConsumo;
-        this.numConsumos = numConsumos;
-        this.descripcion = descripcion;
-        this.servicio = servicio;
-        this.reservaHabitacion = reservaHabitacion;
-        this.usuario = usuario;
+        this.cantidad = cantidad;
+        this.fecha = fecha;
+        this.total = total;
+        this.servicio_id = servicio_id;
+        this.reserva_id = reserva_id;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    public int getSumaTotal() {
-        return sumaTotal;
+
+    public int getCantidad() {
+        return cantidad;
     }
-    public void setSumaTotal(int sumaTotal) {
-        this.sumaTotal = sumaTotal;
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
-    public String getFechaConsumo() {
-        return fechaConsumo;
+
+    public Date getFecha() {
+        return fecha;
     }
-    public void setFechaConsumo(String fechaConsumo) {
-        this.fechaConsumo = fechaConsumo;
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
-    public int getNumConsumos() {
-        return numConsumos;
+
+    public double getTotal() {
+        return total;
     }
-    public void setNumConsumos(int numConsumos) {
-        this.numConsumos = numConsumos;
+
+    public void setTotal(double total) {
+        this.total = total;
     }
-    public String getDescripcion() {
-        return descripcion;
+
+    public String getServicio_id() {
+        return servicio_id;
     }
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+
+    public void setServicio_id(String servicio_id) {
+        this.servicio_id = servicio_id;
     }
-    public String getServicio() {
-        return servicio;
+
+    public String getReserva_id() {
+        return reserva_id;
     }
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
+
+    public void setReserva_id(String reserva_id) {
+        this.reserva_id = reserva_id;
     }
-    public String getReservaHabitacion() {
-        return reservaHabitacion;
-    }
-    public void setReservaHabitacion(String reservaHabitacion) {
-        this.reservaHabitacion = reservaHabitacion;
-    }
-    public String getUsuario() {
-        return usuario;
-    }
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-    
-    
-    
-    
 
 }
