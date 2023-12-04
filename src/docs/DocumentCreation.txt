@@ -90,8 +90,6 @@ db.createCollection("reservas", {
       required: [
         "fecha_inicio",
         "fecha_fin",
-        "fecha_checkin",
-        "fecha_checkout",
         "num_personas",
         "cliente_id",
         "habitacion_id"

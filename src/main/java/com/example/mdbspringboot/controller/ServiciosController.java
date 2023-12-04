@@ -1,4 +1,4 @@
-package com.example.mdbspringboot.Controlador;
+package com.example.mdbspringboot.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.mdbspringboot.Modelo.Producto;
-import com.example.mdbspringboot.Modelo.Servicio;
-import com.example.mdbspringboot.Repositorio.ConsumoRepository;
-import com.example.mdbspringboot.Repositorio.ServicioRepository;
+import com.example.mdbspringboot.modelo.Producto;
+import com.example.mdbspringboot.modelo.Servicio;
+import com.example.mdbspringboot.repositorio.ConsumoRepository;
+import com.example.mdbspringboot.repositorio.ServicioRepository;
 
 @Controller
-public class ServicioController {
+public class ServiciosController {
     
     @Autowired
     ServicioRepository servicioRepository;

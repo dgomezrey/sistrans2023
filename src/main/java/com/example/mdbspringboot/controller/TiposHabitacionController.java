@@ -1,4 +1,4 @@
-package com.example.mdbspringboot.Controlador;
+package com.example.mdbspringboot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.mdbspringboot.Modelo.TipoHabitacion;
-import com.example.mdbspringboot.Repositorio.HabitacionRepository;
-import com.example.mdbspringboot.Repositorio.TipoHabitacionRepository;
+import com.example.mdbspringboot.modelo.TipoHabitacion;
+import com.example.mdbspringboot.repositorio.HabitacionRepository;
+import com.example.mdbspringboot.repositorio.TipoHabitacionRepository;
 
 @Controller
 public class TiposHabitacionController {
@@ -49,18 +49,6 @@ public class TiposHabitacionController {
         return "redirect:/tiposHabitacion";
     }
 
-    @GetMapping("/RF1/{id}/delete")
-    String borrar(Model model, @PathVariable("id") String id) {
-
-        if (!habitacionRepository.findByTipoHabitacion(id).isEmpty()) {
-            model.addAttribute("causa", "HAY HABITACIONES CON ESTE TIPO DE HABITACION ASOCIADO");
-            return "error.html";
-        }
-
-        tipoHabitacionRepository.deleteById(id);
-        return "redirect:/RF1";
-    }
-
     @GetMapping("/tiposHabitacion/{id}/edit")
     public String tipoHabitacionEditarForm(@PathVariable("id") String id, Model model) {
 
@@ -72,29 +60,33 @@ public class TiposHabitacionController {
 
     }
 
-    @PostMapping("/RF1/{id}/edit/save")
-    String saveEdit(Model model, @PathVariable("id") String id, @RequestParam("capacidad") String capacidad,
-            @RequestParam("nombre") String nombre, @RequestParam("listaElementos") String listaElementos) {
-        List<ElementoHabitacion> lista = new ArrayList<>();
-        for (String elem : listaElementos.split(",")) {
-            lista.add(new ElementoHabitacion(elem));
-        }
+    @PostMapping("/tiposHabitacion/{id}/edit/save")
+    public String tipoHabitacionEditarGuardar(@PathVariable("id") String id,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("capacidad") int capacidad, @RequestParam("camas") int camas,
+            @RequestParam("costo_noche") double costo_noche) {
 
         TipoHabitacion tipoHabitacion = tipoHabitacionRepository.findById(id).get();
-        tipoHabitacion.setCapacidad(Integer.parseInt(capacidad));
-        tipoHabitacion.setElementosHabitaciones(lista);
-        tipoHabitacion.setNombre(nombre);
+        tipoHabitacion.setTipo(tipo);
+        tipoHabitacion.setCapacidad(capacidad);
+        tipoHabitacion.setCamas(camas);
+        tipoHabitacion.setCosto_noche(costo_noche);
 
         tipoHabitacionRepository.save(tipoHabitacion);
 
-        return "redirect:/RF1";
-    }
-
-    @PostMapping("/tiposHabitacion/{id}/edit/save")
-    public String tipoHabitacionEditarGuardar(@PathVariable("id") Long id,
-            @ModelAttribute TipoHabitacion tipoHabitacion) {
-        tipoHabitacionRepository.actualizarTipoHabitacion(id, tipoHabitacion.getTipo(), tipoHabitacion.getCapacidad(),
-                tipoHabitacion.getCamas(), tipoHabitacion.getCostoPorNoche());
         return "redirect:/tiposHabitacion";
     }
+
+    @GetMapping("/tiposHabitacion/{id}/delete")
+    public String tipoHabitacionEliminar(Model model, @PathVariable("id") String id) {
+
+        if (!habitacionRepository.findByTipoHabitacionId(id).isEmpty()) {
+            model.addAttribute("causa", "HAY HABITACIONES CON ESTE TIPO DE HABITACION ASOCIADO");
+            return "error.html";
+        } else {
+            tipoHabitacionRepository.deleteById(id);
+            return "redirect:/tiposHabitacion";
+        }
+    }
+
 }

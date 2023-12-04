@@ -1,4 +1,4 @@
-package com.example.mdbspringboot.Modelo;
+package com.example.mdbspringboot.modelo;
 
 import java.util.Date;
 
