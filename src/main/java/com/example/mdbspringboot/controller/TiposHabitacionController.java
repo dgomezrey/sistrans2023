@@ -1,4 +1,4 @@
-package com.example.mdbspringboot.Controlador;
+package com.example.mdbspringboot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.mdbspringboot.Modelo.TipoHabitacion;
-import com.example.mdbspringboot.Repositorio.HabitacionRepository;
-import com.example.mdbspringboot.Repositorio.TipoHabitacionRepository;
+import com.example.mdbspringboot.modelo.TipoHabitacion;
+import com.example.mdbspringboot.repositorio.HabitacionRepository;
+import com.example.mdbspringboot.repositorio.TipoHabitacionRepository;
 
 @Controller
 public class TiposHabitacionController {

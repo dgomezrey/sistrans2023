@@ -1,4 +1,4 @@
-package com.example.mdbspringboot.Controlador;
+package com.example.mdbspringboot.controller;
 
 import java.util.List;
 
@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.mdbspringboot.Modelo.Consumo;
-import com.example.mdbspringboot.Modelo.Habitacion;
-import com.example.mdbspringboot.Modelo.Reserva;
-import com.example.mdbspringboot.Modelo.Servicio;
-import com.example.mdbspringboot.Modelo.Cliente;
-import com.example.mdbspringboot.Repositorio.ConsumoRepository;
-import com.example.mdbspringboot.Repositorio.HabitacionRepository;
-import com.example.mdbspringboot.Repositorio.ReservaRepository;
-import com.example.mdbspringboot.Repositorio.ServicioRepository;
-import com.example.mdbspringboot.Repositorio.ClienteRepository;
+import com.example.mdbspringboot.modelo.Cliente;
+import com.example.mdbspringboot.modelo.Consumo;
+import com.example.mdbspringboot.modelo.Habitacion;
+import com.example.mdbspringboot.modelo.Reserva;
+import com.example.mdbspringboot.modelo.Servicio;
+import com.example.mdbspringboot.repositorio.ClienteRepository;
+import com.example.mdbspringboot.repositorio.ConsumoRepository;
+import com.example.mdbspringboot.repositorio.HabitacionRepository;
+import com.example.mdbspringboot.repositorio.ReservaRepository;
+import com.example.mdbspringboot.repositorio.ServicioRepository;
 
 
 @Controller
-public class ConsumoController {
+public class ConsumosController {
     
     @Autowired
     ConsumoRepository consumoRepository;

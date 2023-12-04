@@ -1,4 +1,4 @@
-package com.example.mdbspringboot.Repositorio;
+package com.example.mdbspringboot.repositorio;
 
 import java.util.Date;
 import java.util.List;
@@ -10,8 +10,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
-import com.example.mdbspringboot.Modelo.Cliente;
+import com.example.mdbspringboot.modelo.Cliente;
 
 @Repository
 public interface ClienteRepository extends MongoRepository<Cliente,String> {
