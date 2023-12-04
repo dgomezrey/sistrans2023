@@ -1,0 +1,16 @@
+db.reservas.aggregate([
+  {
+    $lookup: {
+      from: "habitaciones",
+      localField: "habitacion_id",
+      foreignField: "_id",
+      as: "listreservasHabitacion"
+    }
+  },
+  {
+    $match: {
+      "fecha_checkin": new Date("2003"),
+      "numero": 201
+    }
+  }
+]);

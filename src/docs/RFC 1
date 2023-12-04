@@ -1,0 +1,35 @@
+db.reservas.aggregate([
+  {
+    $lookup: {
+      from: "consumos",
+      localField: "_id",
+      foreignField: "reserva_id",
+      as: "listreservasConsumos"
+    }
+  },
+  {
+    $lookup: {
+      from: "habitaciones",
+      localField: "habitacion_id",
+      foreignField: "_id",
+      as: "listreservasHabitacion"
+    }
+  },
+  {
+    $match: {
+      "fecha_checkout": new Date("2003"),
+      "numero": 201
+    }
+  },
+  {
+    $project: {
+      "total": 1
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      totalSum: { $sum: "$total" }
+    }
+  }
+]);

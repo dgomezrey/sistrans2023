@@ -1,0 +1,8 @@
+
+db.clientes.insertOne({"usuario" : "pepe", "contrasena" : "asdf", "nombre" : "pepe", "email" : "pepe@gmail.com", "tipo_documento" :  "Ti", "documento" : "123566"}) 
+
+db.tipos_habitacion.insertOne( {"tipo" : "Doble", "capacidad": 2, "camas": 2 , "costo_noche": 200.00})
+
+db.consumos.insertOne ({"cantiadad" : 2, "fecha" : new Date("10-12-2003"), "total": 2000.0, "servicio_id": null, "reserva_id" : ObjectId( "656d08e153fd682e1af348f9")})
+
+ 

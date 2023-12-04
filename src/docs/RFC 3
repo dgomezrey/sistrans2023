@@ -1,0 +1,31 @@
+
+db.reservas.aggregate([
+  {
+    $lookup: {
+      from: "consumos",
+      localField: "_id",
+      foreignField: "reserva_id",
+      as: "listreservasConsumos"
+    }
+  },
+  {
+    $match: {
+      "cliente_id": new ObjectId("656d08e153fd682e1af348f9"),
+      $and: [
+        { "fecha_checkout": { $gte: new Date("2020-08-07T00:00:00.000Z") } },
+        { "fecha_checkout": { $lte: new Date("2020-08-07T23:59:59.999Z") } }
+      ]
+    }
+  },
+  {
+    $project: {
+      "total": 1
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      totalSum: { $sum: "$total" }
+    }
+  }
+]);

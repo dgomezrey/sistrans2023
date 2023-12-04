@@ -1,0 +1,17 @@
+db.clientes.insertOne({"usuario" : "pepe", "contrasena" : "asdf", "nombre" : "pepe", "email" : "pepe@gmail.com", "tipo_documento" :  "Ti", "documento" : "123566"}) 
+
+db.tipos_habitacion.insertOne( {"tipo" : "Doble", "capacidad": 2, "camas": 2 , "costo_noche": 200.00})
+
+db.reservas.insertOne({"fecha_inicio" : new Date("12-10-2003"), "fecha_fin": new  Date ("12-10-2003"), "fecha_checkin":  new Date("12-10-2003"), "fecha_checkout" :  new Date("12-10-2003"), "num_personas": 2, "cliente_id" : new ObjectId("656d08e153fd682e1af348f9"), "habitacion_id" : new ObjectId("656d15aac91e41dcf1770f37")} )
+
+
+
+db.reservas.find({_id: ObjectId ("656d1f0bc91e41dcf1770f3d")})
+
+
+db.cursos.updateOne({_id:ObjectId("656d1f0bc91e41dcf1770f3d")},
+{$set:{"habitacion_id": new ObjectId("656d15aac91e41dcf1770f37")}})
+
+
+db.reservas.deleteOne({_id:ObjectId("656d1f0bc91e41dcf1770f3d")})
+
