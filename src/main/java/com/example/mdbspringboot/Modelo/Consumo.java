@@ -1,6 +1,6 @@
 package com.example.mdbspringboot.modelo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,7 +23,7 @@ public class Consumo {
 
     public Consumo() {;}
 
-    public Consumo(String id, int cantidad, Date fecha, double total, String servicio_id, String reserva_id) {
+    public Consumo(String id, int cantidad, java.util.Date fecha, double total, String servicio_id, String reserva_id) {
         this.id = id;
         this.cantidad = cantidad;
         this.fecha = fecha;
