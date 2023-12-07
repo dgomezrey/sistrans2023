@@ -2,6 +2,7 @@ package com.example.mdbspringboot.modelo;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,11 +16,11 @@ public class Habitacion {
     
     private int piso;
 
-    private String tipo_habitacion_id;
+    private ObjectId tipo_habitacion_id;
 
     public Habitacion() {;}
 
-    public Habitacion(String id, int numero, int piso, String tipo_habitacion_id) {
+    public Habitacion(String id, int numero, int piso, ObjectId tipo_habitacion_id) {
         this.id = id;
         this.numero = numero;
         this.piso = piso;
@@ -50,11 +51,11 @@ public class Habitacion {
         this.piso = piso;
     }
 
-    public String getTipo_habitacion_id() {
+    public ObjectId getTipo_habitacion_id() {
         return tipo_habitacion_id;
     }
 
-    public void setTipo_habitacion_id(String tipo_habitacion_id) {
+    public void setTipo_habitacion_id(ObjectId tipo_habitacion_id) {
         this.tipo_habitacion_id = tipo_habitacion_id;
     }
     

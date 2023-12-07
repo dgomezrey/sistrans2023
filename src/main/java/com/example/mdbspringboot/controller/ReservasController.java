@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,7 +66,7 @@ public class ReservasController {
             @RequestParam("fecha_checkout") Date fecha_checkout, @RequestParam("num_personas") int num_personas,
             @RequestParam("cliente_id") String cliente_id, @RequestParam("habitacion_id") String habitacion_id) {
         Reserva reserva = new Reserva(null, fecha_inicio, fecha_fin, fecha_checkin, fecha_checkout, num_personas,
-                cliente_id, habitacion_id);
+                new ObjectId(cliente_id), new ObjectId(habitacion_id));
 
         if (fecha_inicio.after(fecha_fin) || fecha_fin.before(fecha_inicio)) {
             model.addAttribute("causa", "FECHAS NO VALIDAS");
@@ -99,8 +100,8 @@ public class ReservasController {
         reserva.setFecha_checkin(fecha_checkin);
         reserva.setFecha_checkout(fecha_checkout);
         reserva.setNum_personas(num_personas);
-        reserva.setCliente_id(cliente_id);
-        reserva.setHabitacion_id(habitacion_id);
+        reserva.setCliente_id(new ObjectId(cliente_id));
+        reserva.setHabitacion_id(new ObjectId(habitacion_id));
         reservaRepository.save(reserva);
 
         return "redirect:/reservas";

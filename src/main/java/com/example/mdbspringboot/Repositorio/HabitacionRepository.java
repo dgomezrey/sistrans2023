@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -26,17 +29,17 @@ public interface HabitacionRepository extends MongoRepository<Habitacion, String
         private String tipo;
         private int capacidad;
         private int camas;
-        private double costoNoche;
+        private double costo_noche;
 
         public HabitacionConTipo(String id, int numero, int piso, String tipo, int capacidad, int camas,
-                double costoNoche) {
+                double costo_noche) {
             this.id = id;
             this.numero = numero;
             this.piso = piso;
             this.tipo = tipo;
             this.capacidad = capacidad;
             this.camas = camas;
-            this.costoNoche = costoNoche;
+            this.costo_noche = costo_noche;
         }
 
         public String getId() {
@@ -64,7 +67,7 @@ public interface HabitacionRepository extends MongoRepository<Habitacion, String
         }
 
         public double getCostoNoche() {
-            return costoNoche;
+            return costo_noche;
         }
 
         public void setId(String id) {
@@ -91,8 +94,8 @@ public interface HabitacionRepository extends MongoRepository<Habitacion, String
             this.camas = camas;
         }
 
-        public void setCostoNoche(double costoNoche) {
-            this.costoNoche = costoNoche;
+        public void setCostoNoche(double costo_noche) {
+            this.costo_noche = costo_noche;
         }
     }
 
@@ -109,6 +112,6 @@ public interface HabitacionRepository extends MongoRepository<Habitacion, String
             "{ $unwind: '$tipoHabitacion' }",
             "{ $project: { numero: 1, piso: 1, 'tipo': '$tipoHabitacion.tipo', 'capacidad': '$tipoHabitacion.capacidad', 'camas': '$tipoHabitacion.camas', 'costo_noche': '$tipoHabitacion.costo_noche' } }"
     })
-    Optional<HabitacionConTipo> darHabitacionConTipo(String id);
+    Optional<HabitacionConTipo> darHabitacionConTipo(ObjectId id);
     
 }

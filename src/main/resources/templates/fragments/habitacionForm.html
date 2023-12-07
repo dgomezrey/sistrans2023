@@ -31,26 +31,12 @@
           required
           th:value="${habitacion.piso}"
         />
-        <label class="col-form-label">¿Habitación Ocupada?</label>
-        <input
-          class="checkbox"
-          type="checkbox"
-          id="ocupadaCheckbox"
-          onchange="document.getElementById('ocupada').value = this.checked ? 1 : 0;"
-        />
-        <input
-          type="hidden"
-          id="ocupada"
-          name="ocupada"
-          th:value="${habitacion.ocupada != null ? (habitacion.ocupada instanceof T(java.lang.Boolean) ? (habitacion.ocupada ? 1 : 0) : habitacion.ocupada) : 0
-          }"
-        />
         <br />
         <label class="col-form-label">Tipo Habitacion</label>
         <select
           class="form-control"
-          id="tiposHabitacion_id"
-          name="tiposHabitacion_id"
+          id="tipo_habitacion_id"
+          name="tipo_habitacion_id"
           required
         >
           <option

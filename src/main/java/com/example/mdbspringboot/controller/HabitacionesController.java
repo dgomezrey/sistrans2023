@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +46,7 @@ public class HabitacionesController {
     @PostMapping("/habitaciones/new/save")
     public String habitacionGuardar(Model model, @RequestParam("numero") int numero, @RequestParam("piso") int piso,
             @RequestParam("tipo_habitacion_id") String tipo_habitacion_id) {
-        Habitacion habitacion = new Habitacion(null, numero, piso, tipo_habitacion_id);
+        Habitacion habitacion = new Habitacion(null, numero, piso, new ObjectId(tipo_habitacion_id));
         habitacionRepository.insert(habitacion);
 
         return "redirect:/habitaciones";
@@ -65,10 +66,11 @@ public class HabitacionesController {
             @RequestParam("piso") int piso,
             @RequestParam("tipo_habitacion_id") String tipo_habitacion_id) {
 
+        ObjectId tipo_id = new ObjectId(tipo_habitacion_id);
         Habitacion habitacion = habitacionRepository.findById(id).get();
         habitacion.setNumero(numero);
         habitacion.setPiso(piso);
-        habitacion.setTipo_habitacion_id(tipo_habitacion_id);
+        habitacion.setTipo_habitacion_id(tipo_id);
         habitacionRepository.save(habitacion);
 
         return "redirect:/habitaciones";
