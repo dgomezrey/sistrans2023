@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RFC7</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Buenos Clientes:</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Gasto (COP)</th>
+            <th>Tiempo de alojamiento (dias)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="dato : ${datos7}">
+            <td th:text="${dato[0]}"></td>
+            <td th:text="${dato[1]}"></td>
+            <td th:text="${dato[2]}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

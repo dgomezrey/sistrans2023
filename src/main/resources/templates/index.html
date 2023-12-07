@@ -1,66 +1,46 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Hotel de Los Andes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            text-align: center;
-        }
-        .hotel-name {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        .hotel-image {
-            max-width: 100%;
-            height: auto;
-            margin: 20px auto;
-        }
-        .login-form {
-            width: 300px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 5px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        .form-group button {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <img th:src="@{/images/logo.jpg}" width="250">
-        <div class="hotel-name">Hotel de Los Andes</div>
-    </div>
-    <div class="login-form">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HotelAndes</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div class="container mx-auto w-50">
+      <h1 class="text-center">Hotel Andes</h1>
+      <div class="login-form container border border-2 w-50">
         <h2>Iniciar Sesión</h2>
         <form action="/login" method="POST">
-            <div class="form-group">
-                <input type="text" id="nombreusuario" name="nombreusuario" placeholder="Nombre de Usuario" required>
-            </div>
-            <div class="form-group">
-                <input type="text" id="contrasena" name="contrasena" placeholder="password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Iniciar Sesión</button>
-            </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="usuario"
+              name="usuario"
+              placeholder="Nombre de Usuario"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="contraseña"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <br />
+            <button type="submit">Iniciar Sesión</button>
+          </div>
         </form>
+      </div>
+
     </div>
-</body>
+  </body>
 </html>

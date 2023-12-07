@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RFC5</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Consumo de usuario en fechas:</h1>
+      <td th:text="'Consumo total:  ' + ${total5}"></td>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Producto</th>
+            <th>Consumo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="dato : ${datos5}">
+            <td th:text="${dato[0]}"></td>
+            <td th:text="${dato[1]}"></td>
+            <td th:text="${dato[2]}"></td>
+            <td th:text="${dato[3]}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

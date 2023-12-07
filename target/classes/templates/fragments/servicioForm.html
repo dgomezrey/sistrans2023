@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragmento</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div
+      th:fragment="servicioForm(titulo)"
+      class="container border border-2 w-25"
+    >
+      <h1 class="text-center" th:text="${titulo}"></h1>
+      <form>
+        <label class="col-form-label">Nombre</label>
+        <input
+          class="form-control"
+          type="text"
+          id="nombre"
+          name="nombre"
+          required
+          th:value="${servicio.nombre}"
+        />
+        <label class="col-form-label">Descripcion</label>
+        <input
+          class="form-control"
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          required
+          th:value="${servicio.descripcion}"
+        />
+        <label class="col-form-label">Tipo Servicio</label>
+        <select
+          class="form-control"
+          id="tipoServicio"
+          name="tipoServicio"
+          required
+        >
+          <option value="Bar" th:selected="${servicio.tipoServicio eq 'Bar'}">
+            Bar
+          </option>
+          <option
+            value="Gimnasio"
+            th:selected="${servicio.tipoServicio eq 'Gimnasio'}"
+          >
+            Gimnasio
+          </option>
+          <option
+            value="Internet"
+            th:selected="${servicio.tipoServicio eq 'Internet'}"
+          >
+            Internet
+          </option>
+          <option
+            value="Lavanderia"
+            th:selected="${servicio.tipoServicio eq 'Lavanderia'}"
+          >
+            Lavanderia
+          </option>
+          <option
+            value="Piscina"
+            th:selected="${servicio.tipoServicio eq 'Piscina'}"
+          >
+            Piscina
+          </option>
+          <option
+            value="Prestamo"
+            th:selected="${servicio.tipoServicio eq 'Prestamo'}"
+          >
+            Prestamo
+          </option>
+          <option
+            value="Restaurante"
+            th:selected="${servicio.tipoServicio eq 'Restaurante'}"
+          >
+            Restaurante
+          </option>
+          <option value="SPA" th:selected="${servicio.tipoServicio eq 'SPA'}">
+            SPA
+          </option>
+          <option
+            value="SalonConferencia"
+            th:selected="${servicio.tipoServicio eq 'SalonConferencia'}"
+          >
+            SalonConferencia
+          </option>
+          <option
+            value="SalonReunion"
+            th:selected="${servicio.tipoServicio eq 'SalonReunion'}"
+          >
+            SalonReunion
+          </option>
+          <option
+            value="Supermercado"
+            th:selected="${servicio.tipoServicio eq 'Supermercado'}"
+          >
+            Supermercado
+          </option>
+          <option
+            value="Tienda"
+            th:selected="${servicio.tipoServicio eq 'Tienda'}"
+          >
+            Tienda
+          </option>
+        </select>
+        <label class="col-form-label">Costo por unidad</label>
+        <input
+          class="form-control"
+          type="number"
+          id="costoPorUnidad"
+          name="costoPorUnidad"
+          th:value="${servicio.costoPorUnidad}"
+        />
+        <label class="col-form-label">Horario</label>
+        <select class="form-control" id="horario" name="horario">
+          <option value="" th:selected="${servicio.horario == null}">
+          </option>
+          <option value="manana" th:selected="${servicio.horario eq 'manana'}">
+            Mañana
+          </option>
+          <option value="tarde" th:selected="${servicio.horario eq 'tarde'}">
+            Tarde
+          </option>
+          <option value="noche" th:selected="${servicio.horario eq 'noche'}">
+            Noche
+          </option>
+        </select>
+        <label class="col-form-label">Capacidad</label>
+        <input
+          class="form-control"
+          type="number"
+          id="capacidad"
+          name="capacidad"
+          th:value="${servicio.capacidad}"
+        />
+        <div class="text-center">
+          <br />
+          <input type="submit" class="btn btn-primary" value="Guardar" />
+          <a th:href="@{/servicios}" class="btn btn-primary">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

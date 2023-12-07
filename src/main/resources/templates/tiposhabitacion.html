@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tipos Habitacion</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div class="text-center">
+      <h1>Tipos Habitacion</h1>
+      <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Capacidad</th>
+            <th scope="col">Camas</th>
+            <th scope="col">CostoPorNoche</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <th:block th:each="tipo:${tiposHabitacion}">
+          <tr>
+            <td th:text="${tipo.id}"></td>
+            <td th:text="${tipo.tipo}"></td>
+            <td th:text="${tipo.capacidad}"></td>
+            <td th:text="${tipo.camas}"></td>
+            <td th:text="${tipo.costoPorNoche}"></td>
+            <td>
+              <a
+                th:href="@{tiposHabitacion/{id}/edit(id=${tipo.id})}"
+                class="btn btn-primary"
+                >Editar</a
+              >
+              <a
+                th:href="@{tiposHabitacion/{id}/delete(id=${tipo.id})}"
+                onclick="return confirm('¿Borrar este Tipo de Usuario?')"
+                class="btn btn-danger"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+        </th:block>
+      </table>
+      <div>
+        <a th:href="@{/tiposHabitacion/new}" class="btn btn-primary"
+          >Agregar Tipo de Habitacion</a
+        >
+        <a th:href="@{/home}" class="btn btn-primary">Volver</a>
+      </div>
+    </div>
+  </body>
+</html>

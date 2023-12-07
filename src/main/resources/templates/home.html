@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Inicio</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <div><a th:href="@{/logout}" class="btn btn-danger">Logout</a></div>
+    <div class="menu">
+      <h1 class="text-center" th:text="${'Menu de ' + tipo}"></h1>
+      <ul>
+        <li th:if="${(tipo == 'Administrador') || (tipo == 'Gerente')}">
+          <a th:href="@{/tiposUsuario}" class="btn btn-primary"
+            >Tipos Usuario</a
+          >
+        </li>
+
+        <li th:if="${(tipo == 'Administrador') || (tipo == 'Gerente')}">
+          <a th:href="@{/usuarios}" class="btn btn-primary">Usuarios</a>
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/tiposHabitacion}" class="btn btn-primary"
+            >Tipos Habitacion</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/habitaciones}" class="btn btn-primary">Habitaciones</a>
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/servicios}" class="btn btn-primary">Servicios</a>
+        </li>
+
+        <li th:if="${tipo == 'Administrador' || (tipo == 'Gerente')}">
+          <a th:href="@{/planesConsumo}" class="btn btn-primary"
+            >Planes Consumo</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Cliente' || (tipo == 'Gerente')}">
+          <a th:href="@{/reservasAlojamiento}" class="btn btn-primary"
+            >Reservas Alojamiento</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Cliente' || (tipo == 'Gerente')}">
+          <a th:href="@{/reservasServicio}" class="btn btn-primary"
+            >Reservas Servicio</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Empleado' || (tipo == 'Gerente')}">
+          <a th:href="@{/consumos}" class="btn btn-primary">Consumos</a>
+        </li>
+
+        <li
+          th:if="${tipo == 'Administrador' || (tipo == 'Gerente') || (tipo == 'Empleado')}"
+        >
+          <a th:href="@{/productos}" class="btn btn-primary">Productos</a>
+        </li>
+
+        <li th:if="${tipo == 'Recepcionista'}">
+          <a th:href="@{/checkin}" class="btn btn-primary">Realizar check in</a>
+        </li>
+
+        <li th:if="${tipo == 'Recepcionista'}">
+          <a th:href="@{/checkout}" class="btn btn-primary"
+            >Realizar check out</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC1}"
+            >RFC1:Ver dinero recolectado por servicios en cada habitacion</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC2}"
+            >RFC2:Ver 20 servicios más populares en un rango de fechas</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC3}"
+            >RFC3:Ver ocupacion de habitaciones en el ultimo año</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC4}">RFC4:Buscar servicio por caracteristicas</a>
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC5}"
+            >RFC5:Mostrar consumo de un usuario en tiempo dado</a
+          >
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC6}">RFC6:Analizar Operacion Hotel de los Andes</a>
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC7}">RFC7:Mostrar buenos clientes</a>
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC8}">RFC8:Mostrar servicios con poca demanda</a>
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC9}">RFC9:Consumo de usuarios</a>
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC10}">RFC10:Usuarios que no consumen servicios</a>
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC11}">RFC11: Consultar Funcionamiento</a>
+        </li>
+
+        <li th:if="${tipo == 'Gerente'}">
+          <a th:href="@{/RFC12}">RFC12: Consultar Clientes Excelentes</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
