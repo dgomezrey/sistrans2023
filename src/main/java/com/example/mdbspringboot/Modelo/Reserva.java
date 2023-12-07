@@ -40,6 +40,16 @@ public class Reserva {
         this.habitacion_id = habitacion_id;
     }
 
+    public Reserva(String id, Date fecha_inicio, Date fecha_fin, int num_personas, ObjectId cliente_id,
+            ObjectId habitacion_id) {
+        this.id = id;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
+        this.num_personas = num_personas;
+        this.cliente_id = cliente_id;
+        this.habitacion_id = habitacion_id;
+    }
+
     public String getId() {
         return id;
     }

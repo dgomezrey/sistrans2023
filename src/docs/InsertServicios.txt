@@ -1,0 +1,134 @@
+db.servicios.insertMany([
+  {
+    nombre: "Oasis Wellness",
+    descripcion: "Un spa de lujo con una variedad de tratamientos relajantes.",
+    tipo_servicio: "SPA",
+    costo_unidad: 150.5,
+    horario: "Tarde",
+    capacidad: 30,
+    productos: [
+      { nombre: "Masaje Sueco", precio: 80.2 },
+      { nombre: "Terapia de Piedras Calientes", precio: 120.4 }
+    ]
+  },
+  {
+    nombre: "Crédito Express",
+    descripcion: "Servicio de préstamo rápido y confiable.",
+    tipo_servicio: "Prestamo",
+    costo_unidad: 200.3,
+    horario: "Manana",
+    capacidad: 100,
+    productos: [
+      { nombre: "Préstamo Personal", precio: 3000.7 },
+      { nombre: "Préstamo Empresarial", precio: 50000.6 }
+    ]
+  },
+  {
+    nombre: "AquaFun",
+    descripcion: "Piscina olímpica con toboganes y área infantil.",
+    tipo_servicio: "Piscina",
+    costo_unidad: 50.9,
+    horario: "Tarde",
+    capacidad: 200,
+    productos: []
+  },
+  {
+    nombre: "Fitness Pro",
+    descripcion: "Gimnasio moderno con equipos de última generación.",
+    tipo_servicio: "Gimnasio",
+    costo_unidad: 100.8,
+    horario: "Manana",
+    capacidad: 80,
+    productos: [
+      { nombre: "Clase de Yoga", precio: 20.1 },
+      { nombre: "Sesión de Entrenamiento Personal", precio: 60.5 }
+    ]
+  },
+  {
+    nombre: "NetFast",
+    descripcion: "Proveedor de Internet de alta velocidad y confiable.",
+    tipo_servicio: "Internet",
+    costo_unidad: 40.4,
+    horario: "Noche",
+    capacidad: 500,
+    productos: []
+  },
+  {
+    nombre: "Clean & Quick",
+    descripcion: "Servicios de lavandería y tintorería rápidos y eficientes.",
+    tipo_servicio: "Lavanderia",
+    costo_unidad: 25.6,
+    horario: "Tarde",
+    capacidad: 50,
+    productos: [
+      { nombre: "Lavado en Seco", precio: 15.2 },
+      { nombre: "Planchado", precio: 5.7 }
+    ]
+  },
+  {
+    nombre: "Gourmet Delights",
+    descripcion: "Restaurante de alta cocina con una amplia variedad de platos internacionales.",
+    tipo_servicio: "Restaurante",
+    costo_unidad: 80.5,
+    horario: "Noche",
+    capacidad: 120,
+    productos: [
+      { nombre: "Filete Mignon", precio: 30.3 },
+      { nombre: "Sushi Deluxe", precio: 25.8 }
+    ]
+  },
+  {
+    nombre: "Sunset Lounge",
+    descripcion: "Bar elegante con una impresionante selección de cócteles y vinos.",
+    tipo_servicio: "Bar",
+    costo_unidad: 60.2,
+    horario: "Noche",
+    capacidad: 70,
+    productos: [
+      { nombre: "Mojito", precio: 12.9 },
+      { nombre: "Martini Clásico", precio: 15.1 }
+    ]
+  },
+  {
+    nombre: "Todo en Uno",
+    descripcion: "Tienda de conveniencia con una amplia variedad de productos.",
+    tipo_servicio: "Tienda",
+    costo_unidad: 10.7,
+    horario: "Manana",
+    capacidad: 100,
+    productos: [
+      { nombre: "Botella de Agua", precio: 1.4 },
+      { nombre: "Barra de Chocolate", precio: 1.9 }
+    ]
+  },
+  {
+    nombre: "SuperStore",
+    descripcion: "Supermercado con una extensa selección de alimentos y productos para el hogar.",
+    tipo_servicio: "Supermercado",
+    costo_unidad: 20.2,
+    horario: "Tarde",
+    capacidad: 300,
+    productos: [
+      { nombre: "Leche", precio: 0.8 },
+      { nombre: "Pan", precio: 2.3 }
+    ]
+  },
+  {
+    nombre: "Meeting Point",
+    descripcion: "Salón de reuniones equipado para eventos corporativos y privados.",
+    tipo_servicio: "SalonReunion",
+    costo_unidad: 500.9,
+    horario: "Manana",
+    capacidad: 50,
+    productos: []
+  },
+  {
+    nombre: "Conference Elite",
+    descripcion: "Salón de conferencias moderno con tecnología de vanguardia.",
+    tipo_servicio: "SalonConferencia",
+    costo_unidad: 700.5,
+    horario: "Tarde",
+    capacidad: 100,
+    productos: []
+  }
+]);

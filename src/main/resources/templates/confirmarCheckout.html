@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar Checkout</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Resumen de Pago</h1>
+      <p>Aquí están los detalles de tu reserva:</p>
+      <p class="attribute">Total a Pagar: $<span th:text="${dinero}"></span></p>
+      <p class="attribute">
+        Número de Reserva: <span th:text="${reserva.id}"></span>
+      </p>
+      <ul>
+        <li
+          th:each="elemento : ${consumos}"
+          th:text="${elemento.usuario.nombre} + ' - ' + ${elemento.sumaTotal} + ' - ' + ${elemento.descripcion}"
+        ></li>
+      </ul>
+      <p class="attribute">
+        Datos de la habitación:
+        <span
+          th:text="${dias} + ' noches en habitación ' + ${habitacion.numero} "
+        ></span>
+      </p>
+
+      <!-- Formulario para confirmar el pago -->
+      <form
+        th:action="@{'/reservas/' + ${reserva.id} + '/checkOut/save'}"
+        method="post"
+      >
+        <label class="col-form-label">Fecha CheckOut</label>
+        <input
+          class="form-control"
+          type="date"
+          id="fecha_checkOut"
+          name="fecha_checkOut"
+          required
+          th:value="${reserva.fecha_checkout}"
+        />
+
+        <div class="text-center">
+          <br />
+          <a th:href="@{/reservas}" class="btn btn-primary">Cancelar</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirmar Pago</button>
+      </form>
+    </div>
+  </body>
+</html>

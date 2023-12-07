@@ -26,7 +26,7 @@ public class ServiciosController {
 
     @GetMapping("/servicios")
     public String servicios(Model model){
-        model.addAttribute("datos", servicioRepository.findAll());
+        model.addAttribute("servicios", servicioRepository.darServicios());
         return "/servicios.html";
     }
 

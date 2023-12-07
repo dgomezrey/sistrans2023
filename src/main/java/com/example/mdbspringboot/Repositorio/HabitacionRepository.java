@@ -100,18 +100,18 @@ public interface HabitacionRepository extends MongoRepository<Habitacion, String
     }
 
     @Aggregation(pipeline = {
-            "{ $lookup: { from: 'tipos_habitacion', localField: 'tipo_habitacion_id', foreignField: '_id', as: 'tipoHabitacion' } }",
-            "{ $unwind: '$tipoHabitacion' }",
-            "{ $project: { numero: 1, piso: 1, 'tipo': '$tipoHabitacion.tipo', 'capacidad': '$tipoHabitacion.capacidad', 'camas': '$tipoHabitacion.camas', 'costo_noche': '$tipoHabitacion.costo_noche' } }"
+            "{ $lookup: { from: 'tipos_habitacion', localField: 'tipo_habitacion_id', foreignField: '_id', as: 'tipo_habitacion' } }",
+            "{ $unwind: '$tipo_habitacion' }",
+            "{ $project: { numero: 1, piso: 1, tipo: '$tipo_habitacion.tipo', capacidad: '$tipo_habitacion.capacidad', camas: '$tipo_habitacion.camas', costo_noche: '$tipo_habitacion.costo_noche' } }"
     })
     List<HabitacionConTipo> darHabitacionesConTipo();
 
     @Aggregation(pipeline = {
             "{ $match: { '_id': ?0 } }",
-            "{ $lookup: { from: 'tipos_habitacion', localField: 'tipo_habitacion_id', foreignField: '_id', as: 'tipoHabitacion' } }",
-            "{ $unwind: '$tipoHabitacion' }",
-            "{ $project: { numero: 1, piso: 1, 'tipo': '$tipoHabitacion.tipo', 'capacidad': '$tipoHabitacion.capacidad', 'camas': '$tipoHabitacion.camas', 'costo_noche': '$tipoHabitacion.costo_noche' } }"
+            "{ $lookup: { from: 'tipos_habitacion', localField: 'tipo_habitacion_id', foreignField: '_id', as: 'tipo_habitacion' } }",
+            "{ $unwind: '$tipo_habitacion' }",
+            "{ $project: { numero: 1, piso: 1, tipo: '$tipo_habitacion.tipo', capacidad: '$tipo_habitacion.capacidad', camas: '$tipo_habitacion.camas', costo_noche: '$tipo_habitacion.costo_noche' } }"
     })
-    Optional<HabitacionConTipo> darHabitacionConTipo(ObjectId id);
-    
+    Optional<HabitacionConTipo> darHabitacionConTipo(String id);
+
 }

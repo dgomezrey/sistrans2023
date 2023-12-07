@@ -26,6 +26,7 @@ public interface ConsumoRepository extends MongoRepository<Consumo, String> {
     List<Consumo> darConsumosCliente(String clienteId);
 
     public class ConsumoDetalle {
+        private String id;
         private int cantidad;
         private Date fecha;
         private double total;
@@ -34,8 +35,10 @@ public interface ConsumoRepository extends MongoRepository<Consumo, String> {
         private String nombreServicio;
         private String tipoServicio;
 
-        public ConsumoDetalle(int cantidad, Date fecha, double total, String nombreCliente, int numeroHabitacion,
+        public ConsumoDetalle(String id, int cantidad, Date fecha, double total, String nombreCliente,
+                int numeroHabitacion,
                 String nombreServicio, String tipoServicio) {
+            this.id = id;
             this.cantidad = cantidad;
             this.fecha = fecha;
             this.total = total;
@@ -43,6 +46,10 @@ public interface ConsumoRepository extends MongoRepository<Consumo, String> {
             this.numeroHabitacion = numeroHabitacion;
             this.nombreServicio = nombreServicio;
             this.tipoServicio = tipoServicio;
+        }
+
+        public String getId() {
+            return id;
         }
 
         public int getCantidad() {
@@ -55,7 +62,7 @@ public interface ConsumoRepository extends MongoRepository<Consumo, String> {
 
         public double getTotal() {
             return total;
-        } 
+        }
 
         public String getNombreCliente() {
             return nombreCliente;
@@ -71,6 +78,10 @@ public interface ConsumoRepository extends MongoRepository<Consumo, String> {
 
         public String getTipoServicio() {
             return tipoServicio;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
 
         public void setCantidad(int cantidad) {
@@ -112,7 +123,7 @@ public interface ConsumoRepository extends MongoRepository<Consumo, String> {
             "{ $unwind: '$habitacion' }",
             "{ $lookup: { from: 'servicios', localField: 'servicio_id', foreignField: '_id', as: 'servicio' } }",
             "{ $unwind: '$servicio' }",
-            "{ $project: { cantidad: 1, fecha: 1, total: 1, 'cliente.nombre': 1, 'habitacion.numero': 1, 'servicio.nombre': 1, 'servicio.tipo_servicio': 1 } }"
+            "{ $project: { _id: 1, cantidad: 1, fecha: 1, total: 1, nombreCliente: '$cliente.nombre', numeroHabitacion: '$habitacion.numero', nombreServicio: '$servicio.nombre', tipoServicio: '$servicio.tipo_servicio' } }"
     })
     List<ConsumoDetalle> darConsumosDetalle();
 

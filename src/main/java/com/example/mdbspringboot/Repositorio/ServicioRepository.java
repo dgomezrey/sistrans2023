@@ -14,5 +14,8 @@ public interface ServicioRepository extends MongoRepository<Servicio,String> {
 
     @Query("{'tipo_servicio': ?0}")
     Servicio findByTipoServicio(String tipoServicio);
+
+    @Query("{}")
+    List<Servicio> darServicios();
     
 }

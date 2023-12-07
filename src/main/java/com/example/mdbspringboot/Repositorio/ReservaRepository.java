@@ -18,6 +18,7 @@ public interface ReservaRepository extends MongoRepository<Reserva, String> {
     List<Reserva> findByHabitacionId(String habitacionId);
 
     public class ReservaDetalle {
+        private String id;
         private Date fechaInicio;
         private Date fechaFin;
         private Date fechaCheckin;
@@ -28,8 +29,9 @@ public interface ReservaRepository extends MongoRepository<Reserva, String> {
         private int numeroHabitacion;
         private String tipoHabitacion;
 
-        public ReservaDetalle(Date fechaInicio, Date fechaFin, Date fechaCheckin, Date fechaCheckout, int numPersonas,
+        public ReservaDetalle(String id, Date fechaInicio, Date fechaFin, Date fechaCheckin, Date fechaCheckout, int numPersonas,
                 String clienteId, String clienteNombre, int numeroHabitacion, String tipoHabitacion) {
+            this.id = id;
             this.fechaInicio = fechaInicio;
             this.fechaFin = fechaFin;
             this.fechaCheckin = fechaCheckin;
@@ -39,6 +41,10 @@ public interface ReservaRepository extends MongoRepository<Reserva, String> {
             this.clienteNombre = clienteNombre;
             this.numeroHabitacion = numeroHabitacion;
             this.tipoHabitacion = tipoHabitacion;
+        }
+
+        public String getId() {
+            return id;
         }
 
         public Date getFechaInicio() {
@@ -75,6 +81,10 @@ public interface ReservaRepository extends MongoRepository<Reserva, String> {
 
         public String getTipoHabitacion() {
             return tipoHabitacion;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
 
         public void setFechaInicio(Date fechaInicio) {
@@ -115,14 +125,25 @@ public interface ReservaRepository extends MongoRepository<Reserva, String> {
 
     }
 
-    @Aggregation(pipeline = {
+    @Aggregation({
             "{ $lookup: { from: 'clientes', localField: 'cliente_id', foreignField: '_id', as: 'cliente' } }",
+            "{ $unwind: { path: '$cliente', preserveNullAndEmptyArrays: true } }",
             "{ $lookup: { from: 'habitaciones', localField: 'habitacion_id', foreignField: '_id', as: 'habitacion' } }",
-            "{ $unwind: '$cliente' }",
-            "{ $unwind: '$habitacion' }",
+            "{ $unwind: { path: '$habitacion', preserveNullAndEmptyArrays: true } }",
             "{ $lookup: { from: 'tipos_habitacion', localField: 'habitacion.tipo_habitacion_id', foreignField: '_id', as: 'tipoHabitacion' } }",
-            "{ $unwind: '$tipoHabitacion' }",
-            "{ $project: { 'fecha_inicio': 1, 'fecha_fin': 1, 'fecha_checkin': 1, 'fecha_checkout': 1, 'num_personas': 1, 'cliente_id': '$cliente._id', 'cliente_nombre': '$cliente.nombre', 'habitacion_numero': '$habitacion.numero', 'tipo_habitacion': '$tipoHabitacion.tipo' } }"
+            "{ $unwind: { path: '$tipoHabitacion', preserveNullAndEmptyArrays: true } }",
+            "{ $project: { " +
+                    "id: '$_id', " +
+                    "fechaInicio: '$fecha_inicio', " +
+                    "fechaFin: '$fecha_fin', " +
+                    "fechaCheckin: '$fecha_checkin', " +
+                    "fechaCheckout: '$fecha_checkout', " +
+                    "numPersonas: '$num_personas', " +
+                    "clienteId: '$cliente._id', " +
+                    "clienteNombre: '$cliente.nombre', " +
+                    "numeroHabitacion: '$habitacion.numero', " +
+                    "tipoHabitacion: '$tipoHabitacion.tipo' " +
+                    "} }"
     })
     List<ReservaDetalle> darReservasDetalle();
 

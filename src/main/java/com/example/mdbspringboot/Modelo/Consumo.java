@@ -2,6 +2,7 @@ package com.example.mdbspringboot.modelo;
 
 import java.util.Date;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,13 +18,13 @@ public class Consumo {
 
     private double total;
 
-    private String servicio_id;
+    private ObjectId servicio_id;
 
-    private String reserva_id;
+    private ObjectId reserva_id;
 
     public Consumo() {;}
 
-    public Consumo(String id, int cantidad, java.util.Date fecha, double total, String servicio_id, String reserva_id) {
+    public Consumo(String id, int cantidad, java.util.Date fecha, double total, ObjectId servicio_id, ObjectId reserva_id) {
         this.id = id;
         this.cantidad = cantidad;
         this.fecha = fecha;
@@ -64,19 +65,19 @@ public class Consumo {
         this.total = total;
     }
 
-    public String getServicio_id() {
+    public ObjectId getServicio_id() {
         return servicio_id;
     }
 
-    public void setServicio_id(String servicio_id) {
+    public void setServicio_id(ObjectId servicio_id) {
         this.servicio_id = servicio_id;
     }
 
-    public String getReserva_id() {
+    public ObjectId getReserva_id() {
         return reserva_id;
     }
 
-    public void setReserva_id(String reserva_id) {
+    public void setReserva_id(ObjectId reserva_id) {
         this.reserva_id = reserva_id;
     }
 

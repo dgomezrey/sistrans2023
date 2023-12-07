@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Reserva de Alojamiento</title>
+    <title>Crear Consumo</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-    <form action="#" th:action="@{/reservas/new/save}" method="post">
+    <form action="#" th:action="@{/consumos/new/save}" method="post">
         <div
-          th:replace="~{fragments/reservaForm :: reservaForm(titulo='Crear Reserva Alojamiento')}"
+          th:replace="~{fragments/consumoForm :: consumoForm(titulo='Crear Consumo')}"
         ></div>
       </form>
 </body>

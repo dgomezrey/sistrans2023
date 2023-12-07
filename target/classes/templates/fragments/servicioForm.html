@@ -38,73 +38,73 @@
         <label class="col-form-label">Tipo Servicio</label>
         <select
           class="form-control"
-          id="tipoServicio"
-          name="tipoServicio"
+          id="tipo_servicio"
+          name="tipo_servicio"
           required
         >
-          <option value="Bar" th:selected="${servicio.tipoServicio eq 'Bar'}">
+          <option value="Bar" th:selected="${servicio.tipo_servicio eq 'Bar'}">
             Bar
           </option>
           <option
             value="Gimnasio"
-            th:selected="${servicio.tipoServicio eq 'Gimnasio'}"
+            th:selected="${servicio.tipo_servicio eq 'Gimnasio'}"
           >
             Gimnasio
           </option>
           <option
             value="Internet"
-            th:selected="${servicio.tipoServicio eq 'Internet'}"
+            th:selected="${servicio.tipo_servicio eq 'Internet'}"
           >
             Internet
           </option>
           <option
             value="Lavanderia"
-            th:selected="${servicio.tipoServicio eq 'Lavanderia'}"
+            th:selected="${servicio.tipo_servicio eq 'Lavanderia'}"
           >
             Lavanderia
           </option>
           <option
             value="Piscina"
-            th:selected="${servicio.tipoServicio eq 'Piscina'}"
+            th:selected="${servicio.tipo_servicio eq 'Piscina'}"
           >
             Piscina
           </option>
           <option
             value="Prestamo"
-            th:selected="${servicio.tipoServicio eq 'Prestamo'}"
+            th:selected="${servicio.tipo_servicio eq 'Prestamo'}"
           >
             Prestamo
           </option>
           <option
             value="Restaurante"
-            th:selected="${servicio.tipoServicio eq 'Restaurante'}"
+            th:selected="${servicio.tipo_servicio eq 'Restaurante'}"
           >
             Restaurante
           </option>
-          <option value="SPA" th:selected="${servicio.tipoServicio eq 'SPA'}">
+          <option value="SPA" th:selected="${servicio.tipo_servicio eq 'SPA'}">
             SPA
           </option>
           <option
             value="SalonConferencia"
-            th:selected="${servicio.tipoServicio eq 'SalonConferencia'}"
+            th:selected="${servicio.tipo_servicio eq 'SalonConferencia'}"
           >
             SalonConferencia
           </option>
           <option
             value="SalonReunion"
-            th:selected="${servicio.tipoServicio eq 'SalonReunion'}"
+            th:selected="${servicio.tipo_servicio eq 'SalonReunion'}"
           >
             SalonReunion
           </option>
           <option
             value="Supermercado"
-            th:selected="${servicio.tipoServicio eq 'Supermercado'}"
+            th:selected="${servicio.tipo_servicio eq 'Supermercado'}"
           >
             Supermercado
           </option>
           <option
             value="Tienda"
-            th:selected="${servicio.tipoServicio eq 'Tienda'}"
+            th:selected="${servicio.tipo_servicio eq 'Tienda'}"
           >
             Tienda
           </option>
@@ -113,9 +113,9 @@
         <input
           class="form-control"
           type="number"
-          id="costoPorUnidad"
-          name="costoPorUnidad"
-          th:value="${servicio.costoPorUnidad}"
+          id="costo_unidad"
+          name="costo_unidad"
+          th:value="${servicio.costo_unidad}"
         />
         <label class="col-form-label">Horario</label>
         <select class="form-control" id="horario" name="horario">

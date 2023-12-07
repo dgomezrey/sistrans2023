@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Checkin</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <form th:action="@{'/reservas/'+${reserva.id}+'/checkIn/save'}" th:object="${reserva}" method="post">
+        <div th:replace="~{fragments/checkInForm :: reservaForm(titulo='Realizar Checkin', reserva=${reserva})}" ></div>
+
+</body>
+</html>

@@ -12,7 +12,7 @@
   </head>
   <body>
     <div
-      th:fragment="reservaAlojamientoForm(titulo)"
+      th:fragment="reservaForm(titulo)"
       class="container border border-2 w-25"
     >
       <h1 class="text-center" th:text="${titulo}"></h1>
@@ -21,48 +21,48 @@
         <input
           class="form-control"
           type="date"
-          id="fecha_in"
-          name="fechaIn"
+          id="fecha_inicio"
+          name="fecha_inicio"
           required
-          th:value="${reservaAlojamiento.fecha_in}"
+          th:value="${reserva.fecha_inicio}"
         />
         <label class="col-form-label">Fecha Fin</label>
         <input
           class="form-control"
           type="date"
-          id="fecha_out"
-          name="fechaOut"
+          id="fecha_fin"
+          name="fecha_fin"
           required
-          th:value="${reservaAlojamiento.fecha_out}"
+          th:value="${reserva.fecha_fin}"
         />
         <label class="col-form-label">Huespedes</label>
         <input
           class="form-control"
           type="number"
           id="num_personas"
-          name="numPersonas"
+          name="num_personas"
           required
-          th:value="${reservaAlojamiento.num_personas}"
+          th:value="${reserva.num_personas}"
         />
         <label class="col-form-label">Usuario</label>
         <select
           class="form-control"
           id="cliente_id"
-          name="usuarios_id"
+          name="cliente_id"
           required
         >
           <option
-            th:each="usuario : ${usuarios}"
+            th:each="usuario : ${clientes}"
             th:value="${usuario.id}"
-            th:text="${usuario.username}"
+            th:text="${usuario.usuario}"
           ></option>
         </select>
 
         <label class="col-form-label">Habitacion</label>
         <select
           class="form-control"
-          id="habitaciones_id"
-          name="habitaciones_id"
+          id="habitacion_id"
+          name="habitacion_id"
           required
         >
           <option
@@ -74,7 +74,7 @@
         <div class="text-center">
           <br />
           <input type="submit" class="btn btn-primary" value="Guardar" />
-          <a th:href="@{/reservasAlojamiento}" class="btn btn-primary"
+          <a th:href="@{/reservas}" class="btn btn-primary"
             >Cancelar</a
           >
         </div>

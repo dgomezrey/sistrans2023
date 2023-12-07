@@ -19,30 +19,50 @@
             <th scope="col">ID</th>
             <th scope="col">Fecha inicio</th>
             <th scope="col">Fecha Fin</th>
-            <th scope="col">Huespedes</th>
-            <th scope="col">Usuario</th>
-            <th scope="col">Plan Consumo</th>
+            <th scope="col">#Huespedes</th>
+            <th scope="col">Cliente</th>
             <th scope="col">Habitacion</th>
+            <th scope="col">Fecha CheckIn</th>
+            <th scope="col">Fecha CheckOut</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
-        <th:block th:each="reserva:${reservasAlojamiento}">
+        <th:block th:each="reserva:${reservas}">
           <tr>
             <td th:text="${reserva.id}"></td>
-            <td th:text="${reserva.fechaIn}"></td>
-            <td th:text="${reserva.fechaOut}"></td>
+            <td
+              th:text="${#dates.format(reserva.fechaInicio, 'EEE MMM dd yyyy')}"
+            ></td>
+            <td
+              th:text="${#dates.format(reserva.fechaFin, 'EEE MMM dd yyyy')}"
+            ></td>
             <td th:text="${reserva.numPersonas}"></td>
-            <td th:text="${reserva.usuarios_id.username}"></td>
-            <td th:text="${reserva.planesConsumo_id.nombre}"></td>
-            <td th:text="${reserva.habitaciones_id.numero}"></td>
+            <td th:text="${reserva.clienteNombre}"></td>
+            <td th:text="${reserva.numeroHabitacion}"></td>
+            <td
+              th:text="${#dates.format(reserva.fechaCheckin, 'EEE MMM dd yyyy')}"
+            ></td>
+            <td
+              th:text="${#dates.format(reserva.fechaCheckout, 'EEE MMM dd yyyy')}"
+            ></td>
             <td>
               <a
-                th:href="@{reservasAlojamiento/{id}/edit(id=${reserva.id})}"
+                th:href="@{reservas/{id}/edit(id=${reserva.id})}"
                 class="btn btn-primary"
                 >Editar</a
               >
               <a
-                th:href="@{reservasAlojamiento/{id}/delete(id=${reserva.id})}"
+                th:href="@{reservas/{id}/checkIn(id=${reserva.id})}"
+                class="btn btn-primary"
+                >Check In</a
+              >
+              <a
+                th:href="@{reservas/{id}/checkOut(id=${reserva.id})}"
+                class="btn btn-primary"
+                >Check Out</a
+              >
+              <a
+                th:href="@{reservas/{id}/delete(id=${reserva.id})}"
                 onclick="return confirm('¿Borrar esta reserva?')"
                 class="btn btn-danger"
                 >Eliminar</a
@@ -52,9 +72,7 @@
         </th:block>
       </table>
       <div>
-        <a th:href="@{/reservasAlojamiento/new}" class="btn btn-primary"
-          >Crear Reserva</a
-        >
+        <a th:href="@{/reservas/new}" class="btn btn-primary">Crear Reserva</a>
         <a th:href="@{/home}" class="btn btn-primary">Volver</a>
       </div>
     </div>

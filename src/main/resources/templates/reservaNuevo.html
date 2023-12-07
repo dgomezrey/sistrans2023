@@ -7,9 +7,9 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-    <form action="#" th:action="@{/reservasAlojamiento/new/save}" method="post">
+    <form action="#" th:action="@{/reservas/new/save}" method="post">
         <div
-          th:replace="~{fragments/reservaAlojamientoForm :: reservaAlojamientoForm(titulo='Crear Reserva Alojamiento')}"
+          th:replace="~{fragments/reservaForm :: reservaForm(titulo='Crear Reserva Alojamiento')}"
         ></div>
       </form>
 </body>

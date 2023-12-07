@@ -1,5 +1,6 @@
 package com.example.mdbspringboot.controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,14 +62,19 @@ public class ReservasController {
     }
 
     @PostMapping("/reservas/new/save")
-    public String reservaGuardar(Model model, @RequestParam("fecha_inicio") Date fecha_inicio,
-            @RequestParam("fecha_fin") Date fecha_fin, @RequestParam("fecha_checkin") Date fecha_checkin,
-            @RequestParam("fecha_checkout") Date fecha_checkout, @RequestParam("num_personas") int num_personas,
-            @RequestParam("cliente_id") String cliente_id, @RequestParam("habitacion_id") String habitacion_id) {
-        Reserva reserva = new Reserva(null, fecha_inicio, fecha_fin, fecha_checkin, fecha_checkout, num_personas,
+    public String reservaGuardar(Model model, @RequestParam("fecha_inicio") String fecha_inicio,
+            @RequestParam("fecha_fin") String fecha_fin, @RequestParam("num_personas") int num_personas,
+            @RequestParam("cliente_id") String cliente_id, @RequestParam("habitacion_id") String habitacion_id)
+            throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fechaInicio = format.parse(fecha_inicio);
+        Date fechaFin = format.parse(fecha_fin);
+        Reserva reserva = new Reserva(null, fechaInicio, fechaFin, num_personas,
                 new ObjectId(cliente_id), new ObjectId(habitacion_id));
 
-        if (fecha_inicio.after(fecha_fin) || fecha_fin.before(fecha_inicio)) {
+        if (fechaInicio.after(fechaFin) || fechaFin.before(fechaInicio)) {
             model.addAttribute("causa", "FECHAS NO VALIDAS");
             return "error.html";
         } else {
@@ -89,16 +95,19 @@ public class ReservasController {
     }
 
     @PostMapping("/reservas/{id}/edit/save")
-    public String reservaEditarGuardar(@PathVariable("id") String id, @RequestParam("fecha_inicio") Date fecha_inicio,
-            @RequestParam("fecha_fin") Date fecha_fin, @RequestParam("fecha_checkin") Date fecha_checkin,
-            @RequestParam("fecha_checkout") Date fecha_checkout, @RequestParam("num_personas") int num_personas,
-            @RequestParam("cliente_id") String cliente_id, @RequestParam("habitacion_id") String habitacion_id) {
+    public String reservaEditarGuardar(@PathVariable("id") String id, @RequestParam("fecha_inicio") String fecha_inicio,
+            @RequestParam("fecha_fin") String fecha_fin, @RequestParam("num_personas") int num_personas,
+            @RequestParam("cliente_id") String cliente_id, @RequestParam("habitacion_id") String habitacion_id)
+            throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fechaInicio = format.parse(fecha_inicio);
+        Date fechaFin = format.parse(fecha_fin);
 
         Reserva reserva = reservaRepository.findById(id).get();
-        reserva.setFecha_inicio(fecha_inicio);
-        reserva.setFecha_fin(fecha_fin);
-        reserva.setFecha_checkin(fecha_checkin);
-        reserva.setFecha_checkout(fecha_checkout);
+        reserva.setFecha_inicio(fechaInicio);
+        reserva.setFecha_fin(fechaFin);
         reserva.setNum_personas(num_personas);
         reserva.setCliente_id(new ObjectId(cliente_id));
         reserva.setHabitacion_id(new ObjectId(habitacion_id));
@@ -122,22 +131,27 @@ public class ReservasController {
 
     @GetMapping("/reservas/{id}/checkIn")
     public String checkIn(Model model, @PathVariable("id") String id) {
-        Reserva reservaHabitacion = reservaRepository.findById(id).get();
+        Reserva reserva = reservaRepository.findById(id).get();
 
-        if (reservaHabitacion.getFecha_checkin() != null) {
+        if (reserva.getFecha_checkin() != null) {
             model.addAttribute("causa", "YA SE REALIZO EL CHECKIN");
             return "error.html";
         } else {
-            model.addAttribute("id", id);
+            model.addAttribute("reserva", reserva);
             return "realizarCheckIn";
         }
     }
 
     @PostMapping("/reservas/{id}/checkIn/save")
     public String checkInGuardar(Model model, @PathVariable("id") String id,
-            @RequestParam("fecha_checkin") Date fecha_checkin) {
+            @RequestParam("fecha_checkin") String fecha_checkin) throws ParseException {
         Reserva reservaHabitacion = reservaRepository.findById(id).get();
-        reservaHabitacion.setFecha_checkin(fecha_checkin);
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fecha_ck = format.parse(fecha_checkin);
+
+        reservaHabitacion.setFecha_checkin(fecha_ck);
         reservaRepository.save(reservaHabitacion);
 
         return "redirect:/reservas";
@@ -147,25 +161,27 @@ public class ReservasController {
 
     @GetMapping("/reservas/{id}/checkOut")
     public String checkOut(Model model, @PathVariable("id") String id) {
-        Reserva reservaHabitacion = reservaRepository.findById(id).get();
+        Reserva reserva = reservaRepository.findById(id).get();
 
-        if (reservaHabitacion.getFecha_checkin() == null) {
+        if (reserva.getFecha_checkin() == null) {
             model.addAttribute("causa", "NO SE HA REALIZADO EL CHECKIN");
             return "error.html";
-        } else if (reservaHabitacion.getFecha_checkout() != null) {
+        } else if (reserva.getFecha_checkout() != null) {
             model.addAttribute("causa", "YA SE REALIZO EL CHECKOUT");
             return "error.html";
         } else {
-            model.addAttribute("id", id);
+            model.addAttribute("reserva", reserva);
             return "realizarCheckOut";
         }
     }
 
-    @GetMapping("/reservas/{id}/checkOut/cuenta")
-    public String cuenta(Model model, @PathVariable("id") String id,
-            @RequestParam("fecha_checkOut") Date fecha_checkOut) {
+    @PostMapping("/reservas/{id}/checkOut/cuenta")
+    public String cuenta(Model model, @PathVariable("id") String id) throws ParseException {
         Reserva reserva = reservaRepository.findById(id).get();
-        HabitacionConTipo habitacion = habitacionRepository.darHabitacionConTipo(reserva.getHabitacion_id()).get();
+
+        String hab_id = reserva.getHabitacion_id().toString();
+
+        HabitacionConTipo habitacion = habitacionRepository.darHabitacionConTipo(hab_id).get();
 
         long dias = (reserva.getFecha_fin().getTime() - reserva.getFecha_inicio().getTime()) / (24 * 60 * 60 * 1000);
 
@@ -177,8 +193,10 @@ public class ReservasController {
             dinero += consumo.getTotal();
         }
 
+
+
         model.addAttribute("dinero", dinero);
-        model.addAttribute("fecha_checkOut", fecha_checkOut);
+        
         model.addAttribute("id", id);
         model.addAttribute("consumos", consumos);
         model.addAttribute("reserva", reserva);
@@ -190,9 +208,14 @@ public class ReservasController {
 
     @PostMapping("/reservas/{id}/checkOut/save")
     public String checkOutGuardar(Model model, @PathVariable("id") String id,
-            @RequestParam("fecha_checkOut") Date fecha_checkOut) {
+            @RequestParam("fecha_checkOut") String fecha_checkOut) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fecha_ck = format.parse(fecha_checkOut);
+
         Reserva reserva = reservaRepository.findById(id).get();
-        reserva.setFecha_checkout(fecha_checkOut);
+        reserva.setFecha_checkout(fecha_ck);
         reservaRepository.save(reserva);
 
         return "redirect:/reservas";

@@ -44,45 +44,30 @@
           required
           th:value="${consumo.total}"
         />
-        <label class="col-form-label">Habitacion</label>
+        <label class="col-form-label">Reserva</label>
         <select
           class="form-control"
-          id="habitaciones_id"
-          name="habitaciones_id"
+          id="reserva_id"
+          name="reserva_id"
           required
         >
           <option
-            th:each="habitacion:${habitaciones}"
-            th:value="${habitacion.id}"
-            th:text="${habitacion.numero}"
+            th:each="reserva:${reservas}"
+            th:value="${reserva.id}"
+            th:text="${reserva.numeroHabitacion}"
           ></option>
         </select>
         <label class="col-form-label">Servicio</label>
         <select
           class="form-control"
-          id="servicios_id"
-          name="servicios_id"
+          id="servicio_id"
+          name="servicio_id"
           required
         >
           <option
             th:each="servicio:${servicios}"
             th:value="${servicio.id}"
             th:text="${servicio.nombre}"
-          ></option>
-        </select>
-        <label class="col-form-label">Producto</label>
-        <select class="form-control" id="productos_id" name="productos_id">
-          <option
-            th:each="producto:${productos}"
-            th:if="${producto.nombre == 'Sin Producto'}"
-            th:value="${producto.id}"
-            th:text="${producto.nombre}"
-          ></option>
-          <option
-            th:each="producto:${productos}"
-            th:unless="${producto.nombre == 'Sin Producto'}"
-            th:value="${producto.id}"
-            th:text="${producto.nombre}"
           ></option>
         </select>
 

@@ -1,8 +1,12 @@
 package com.example.mdbspringboot.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,16 +56,21 @@ public class ConsumosController {
         model.addAttribute("consumo", new Consumo());
         model.addAttribute("servicios", servicioRepository.findAll());
         model.addAttribute("usuarios", usuarioRepository.findAll());
-        model.addAttribute("reservas", reservaHabitacionRepository.findAll());
+        model.addAttribute("reservas", reservaHabitacionRepository.darReservasDetalle());
 
         return "consumoNuevo";
     }
 
     @PostMapping("/consumos/new/save")
-    public String consumoGuardar(Model model, @RequestParam("cantidad") int cantidad, @RequestParam("fecha") Date fecha,
+    public String consumoGuardar(Model model, @RequestParam("cantidad") int cantidad,
+            @RequestParam("fecha") String fecha,
             @RequestParam("total") double total, @RequestParam("servicio_id") String servicio_id,
-            @RequestParam("reserva_id") String reserva_id) {
-        Consumo consumo = new Consumo(null, cantidad, fecha, total, servicio_id, reserva_id);
+            @RequestParam("reserva_id") String reserva_id) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fecha1 = format.parse(fecha);
+        Consumo consumo = new Consumo(null, cantidad, fecha1, total, new ObjectId(servicio_id), new ObjectId(reserva_id));
 
         consumoRepository.insert(consumo);
         return "redirect:/consumos";
@@ -80,15 +89,20 @@ public class ConsumosController {
 
     @PostMapping("/consumos/{id}/edit/save")
     public String consumoEditarGuardar(Model model, @PathVariable("id") String id,
-            @RequestParam("cantidad") int cantidad, @RequestParam("fecha") Date fecha,
+            @RequestParam("cantidad") int cantidad, @RequestParam("fecha") String fecha,
             @RequestParam("total") double total, @RequestParam("servicio_id") String servicio_id,
-            @RequestParam("reserva_id") String reserva_id) {
+            @RequestParam("reserva_id") String reserva_id) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fecha1 = format.parse(fecha);
+
         Consumo consumo = consumoRepository.findById(id).get();
         consumo.setCantidad(cantidad);
-        consumo.setFecha(fecha);
+        consumo.setFecha(fecha1);
         consumo.setTotal(total);
-        consumo.setServicio_id(servicio_id);
-        consumo.setReserva_id(reserva_id);
+        consumo.setServicio_id(new ObjectId(servicio_id));
+        consumo.setReserva_id(new ObjectId(reserva_id));
         consumoRepository.save(consumo);
 
         return "redirect:/consumos";

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Servicios</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+  </head>
+  <body>
+    <div class="text-center">
+      <h1>Lista de Servicios</h1>
+      <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">TipoServicio</th>
+            <th scope="col">CostoPorUnidad</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Capacidad</th>
+            <th scope="col">Productos</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <th:block th:each="servicio:${servicios}">
+          <tr>
+            <td th:text="${servicio.id}"></td>
+            <td th:text="${servicio.nombre}"></td>
+            <td th:text="${servicio.descripcion}"></td>
+            <td th:text="${servicio.tipo_servicio}"></td>
+            <td th:text="${servicio.costo_unidad}"></td>
+            <td th:text="${servicio.horario}"></td>
+            <td th:text="${servicio.capacidad}"></td>
+            <td>
+              <ul>
+                <li
+                  th:each="producto : ${servicio.productos}"
+                  th:text="${producto.nombre} + ':' + ${producto.precio}"
+                ></li>
+              </ul>
+            </td>
+            <td>
+              <a
+                th:href="@{servicios/{id}/edit(id=${servicio.id})}"
+                class="btn btn-primary"
+                >Editar</a
+              >
+              <a
+                th:href="@{servicios/{id}/delete(id=${servicio.id})}"
+                onclick="return confirm('¿Borrar este servicio?')"
+                class="btn btn-danger"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+        </th:block>
+      </table>
+
+      <div>
+        <a th:href="@{/servicios/new}" class="btn btn-primary"
+          >Agregar Servicio</a
+        >
+        <a th:href="@{/home}" class="btn btn-primary">Volver</a>
+      </div>
+    </div>
+  </body>
+</html>
